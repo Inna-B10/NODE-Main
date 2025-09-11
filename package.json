@@ -1,0 +1,21 @@
+{
+	"name": "npm-events",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"sideEffects": false,
+	"main": "index.js",
+	"scripts": {
+		"start": "node index",
+		"dev": "nodemon"
+	},
+	"dependencies": {
+		"date-fns": "^4.1.0",
+		"uuid": "^13.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.10"
+	}
+}
