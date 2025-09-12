@@ -2,10 +2,6 @@
 // These 3 utilities are used throughout the file.
 // Do not comment them out.
 // **********************************************************************************************************************
-/* ------------------------------ Processing Errors */
-process.on('uncaughtException', (err, origin) => {
-	fs.writeSync(process.stderr.fd, `${BOLD}Caught exception: ${err}\n` + `Exception origin: ${origin}\n${RESET}`)
-})
 
 /* ------------------------------ Colors in Terminal */
 const COLORS = {
@@ -14,6 +10,12 @@ const COLORS = {
 	BLUE: '\x1B[38;5;27m',
 	ORANGE: '\x1B[38;5;202m',
 }
+
+/* ------------------------------ Processing Errors */
+const fs = require('fs')
+process.on('uncaughtException', (err, origin) => {
+	fs.writeSync(process.stderr.fd, `${COLORS.BOLD}Caught exception: ${err}\n` + `Exception origin: ${origin}\n${COLORS.RESET}`)
+})
 
 /* ------------------------------- Check if File Exists */
 async function checkFileExistsSync(filePath) {
