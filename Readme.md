@@ -37,7 +37,65 @@ const logsDir = join(process.cwd(), 'logs')
 
 ---
 
-   <br />
+<br />
+<br />
+
+# Webserver
+
+### step 1:
+
+1. **new files:**
+   - add new files from the archive **step1**
+   - check if **utils/path.js** from previous exists
+
+<pre>
+📂root
+┣ 📂css
+┃ ┗ 📜stylesheet.css
+┣ 📂data
+┃ ┣ 📜data.json
+┃ ┗ 📜data.txt
+┣ 📂img
+┃ ┗ 📜bg.png
+┣ 📂view
+┃ ┣ 📂about
+┃ ┃ ┗ 📜index.html
+┃ ┣ 📜404.html
+┃ ┣ 📜index.html
+┃ ┗ 📜new-page.html
+┗ 📜server.js
+</pre>
+
+2. **package.json:**
+   replace
+
+```json
+"main": "index.js",
+"scripts": {
+"start": "node index",
+"dev": "nodemon"
+},
+```
+
+with
+
+```json
+    "main": "server.js",
+    "scripts": {
+    	"start": "node server",
+    	"dev": "nodemon server"
+    },
+```
+
+3. **delete** index.js
+4. run **npm run dev**
+
+---
+
+---
+
+<br />
+<br />
 
 ## **Path alias (optional):**
 
@@ -64,7 +122,7 @@ export async function serveFile(filePath, contentType, response, emitter) {
 }
 ```
 
-- **server.js:** delete
+- **server.js:** delete function
 
 ```js
 //serve the file
@@ -99,64 +157,65 @@ import { serveFile } from '#utils/serveFile.js'
 ```
 
 <br />
-<br />
-<br />
 
-# Webserver
+### Method 2: only for CommonJS
 
-### step 1:
+<details>
+<summary> not tested!</summary>
 
-1. **new files:**
-   - add new files from the folder **step1**
-   - check if **utils/path.js** from previous exists
+1. **npm install module-alias --save**
+2. **package.json:** add
 
-<pre>
-📂root
-┣ 📂css
-┃ ┗ 📜stylesheet.css
-┣ 📂data
-┃ ┣ 📜data.json
-┃ ┗ 📜data.txt
-┣ 📂img
-┃ ┗ 📜bg.png
-┣ 📂view
-┃ ┣ 📂about
-┃ ┃ ┗ 📜index.html
-┃ ┣ 📜404.html
-┃ ┣ 📜index.html
-┃ ┗ 📜new-page.html
-┗ 📜server.js
-</pre>
-
-2. **package.json:**
-   replace
-
+```js
+  "_moduleAliases": {
+		"@": "./",
+		"@utils": "./utils"
+  },
 ```
 
-"main": "index.js",
+3. using alias: in the very first file **before** all imports add
+
+```js
+require('module-alias/register')
+```
+
+no need to paste into each file.
+`module-alias/register` patches the global module resolver once for the entire lifetime of the Node.js process.
+
+After that, any of import '@utils/...' will work in any file in the project.
+
+So it's enough to include it **once in the very first file (e.g. server.js or bootstrap.js)**, the main thing is that it is executed before the first use of the alias.
+
+4. example imports: **server.js**
+
+```js
+require('module-alias/register')
+const serveFile = require('@utils/serveFile.js')
+```
+
+### **NB! IMPORTANT**
+
+if the import order changes automatically on saving:
+
+#### alternative1: change VS Code settings:
+
+```json
+"typescript.preferences.importModuleSpecifier": "non-relative",
+"editor.codeActionsOnSave": {
+  "source.organizeImports": false
+}
+```
+
+#### alternative2:
+
+- **for CommonJs:** in package.json
+
+```json
 "scripts": {
-"start": "node index",
-"dev": "nodemon"
-},
-
+    "dev": "node --require module-alias/register server.js"
+  }
 ```
 
-with
+</details>
 
-```
-
-    "main": "server.js",
-    "scripts": {
-    	"start": "node server",
-    	"dev": "nodemon server"
-    },
-
-```
-
-3. **delete** index.js
-
-### Step 2 :
-
-```
-
-```
+<br />
