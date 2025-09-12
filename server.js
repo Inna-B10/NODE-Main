@@ -1,11 +1,12 @@
-import EventEmitter from 'events'
+import { __dirname } from '#utils/path.js'
+import { serveFile } from '#utils/serveFile.js'
+import { EventEmitter } from 'events'
 import { existsSync } from 'fs'
-import * as fsPromises from 'fs/promises'
 import http from 'http'
 import path from 'path'
 import logEvents from './logEvents.js'
-import { __dirname } from './utils/path.js'
 
+//initialize event emitter object
 class MyEmitter extends EventEmitter {}
 const emitter = new MyEmitter()
 
@@ -64,20 +65,6 @@ const server = http.createServer((req, res) => {
 	//check if file exists
 	const fileExists = existsSync(filePath)
 
-	//serve the file
-	const serveFile = async (filepath, contentType, response) => {
-		try {
-			const rawData = await fsPromises.readFile(filepath, contentType.includes('image') ? '' : 'utf8')
-			const data = contentType === 'application/json' ? JSON.parse(rawData) : rawData
-			response.writeHead(filePath.includes('404.html') ? 404 : 200, { 'Content-Type': contentType })
-			response.end(contentType === 'application/json' ? JSON.stringify(data) : data)
-		} catch (err) {
-			console.log(err)
-			emitter.emit('log', `${err.name}: ${err.message}`, 'errorLog.txt')
-			response.statusCode = 500
-			response.end()
-		}
-	}
 	if (fileExists) {
 		if (!extensions && req.url.slice(-1) !== '/') {
 			// f.ex. /about → /about.html
@@ -93,7 +80,7 @@ const server = http.createServer((req, res) => {
 			return
 		}
 
-		serveFile(filePath, contentType, res)
+		serveFile(filePath, contentType, res, emitter)
 	} else {
 		switch (path.parse(filePath).base) {
 			case 'old-page.html':
@@ -105,7 +92,7 @@ const server = http.createServer((req, res) => {
 				res.end()
 				break
 			default:
-				serveFile(path.join(__dirname, 'view', '404.html'), 'text/html', res)
+				serveFile(path.join(__dirname, 'view', '404.html'), 'text/html', res, emitter)
 				break
 		}
 	}

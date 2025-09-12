@@ -6,6 +6,9 @@
 	"author": "",
 	"type": "module",
 	"sideEffects": false,
+	"imports": {
+		"#utils/*": "./utils/*"
+	},
 	"main": "server.js",
 	"scripts": {
 		"start": "node server",
