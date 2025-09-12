@@ -6,10 +6,10 @@
 	"author": "",
 	"type": "module",
 	"sideEffects": false,
-	"main": "index.js",
+	"main": "server.js",
 	"scripts": {
-		"start": "node index",
-		"dev": "nodemon"
+		"start": "node server",
+		"dev": "nodemon server"
 	},
 	"dependencies": {
 		"date-fns": "^4.1.0",

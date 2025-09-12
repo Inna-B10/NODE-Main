@@ -8,7 +8,7 @@ import { __dirname } from './utils/path.js'
 const logEvents = async (message, fileName) => {
 	const dateTime = `${format(new Date(), 'ddMMyyyy\tHH:mm:ss')}`
 	const theLog = `${dateTime}\t${uuid()}\t${message}\n`
-	console.log(theLog)
+	// console.log(theLog)
 	try {
 		if (!existsSync(join(__dirname, 'logs'))) {
 			await fsPromises.mkdir(join(__dirname, 'logs'))
@@ -18,4 +18,5 @@ const logEvents = async (message, fileName) => {
 		console.error(err)
 	}
 }
+
 export default logEvents

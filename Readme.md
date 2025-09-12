@@ -38,9 +38,14 @@ const logsDir = join(process.cwd(), 'logs')
 
 # Webserver
 
+### step 1:
+
 1. **new files:**
+   - add new files from the folder **step1**
+   - check if **utils/path.js** from previous exists
 
 <pre>
+📂root
 ┣ 📂css
 ┃ ┗ 📜stylesheet.css
 ┣ 📂data
@@ -54,7 +59,7 @@ const logsDir = join(process.cwd(), 'logs')
 ┃ ┣ 📜404.html
 ┃ ┣ 📜index.html
 ┃ ┗ 📜new-page.html
-
+┗ 📜server.js
 </pre>
 
 2. **package.json:**  
@@ -78,20 +83,4 @@ with
 	},
 ```
 
-3. **rename** index.js to server.js
-4. **server.js:** delete
-
-```
-setTimeout(() => {
-	emitter.emit('log', 'Something changed!', 'eventLog.txt')
-}, 2000)
-```
-
-4. **server.js**: add
-
-```
-import path from 'path'
-import http from 'http'
-import { existsSync } from 'fs'
-import * as fsPromises from 'fs/promises'
-```
+3. **delete** index.js
