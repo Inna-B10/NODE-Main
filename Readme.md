@@ -31,6 +31,67 @@ const logsDir = join(process.cwd(), 'logs')
 ```
 
 3. **Syntax**  
-   Use import / export everywhere. Don’t mix require and import in the same project.
+    Use import / export everywhere. Don’t mix require and import in the same project.
+   <br />
+   <br />
+   <br />
 
----
+# Webserver
+
+1. **new files:**
+
+<pre>
+┣ 📂css
+┃ ┗ 📜stylesheet.css
+┣ 📂data
+┃ ┣ 📜data.json
+┃ ┗ 📜data.txt
+┣ 📂img
+┃ ┗ 📜bg.png
+┣ 📂view
+┃ ┣ 📂about
+┃ ┃ ┗ 📜index.html
+┃ ┣ 📜404.html
+┃ ┣ 📜index.html
+┃ ┗ 📜new-page.html
+
+</pre>
+
+2. **package.json:**  
+   replace
+
+```
+"main": "index.js",
+	"scripts": {
+		"start": "node index",
+		"dev": "nodemon"
+	},
+```
+
+with
+
+```
+	"main": "server.js",
+	"scripts": {
+		"start": "node server",
+		"dev": "nodemon server"
+	},
+```
+
+3. **rename** index.js to server.js
+4. **server.js:** delete
+
+```
+setTimeout(() => {
+	emitter.emit('log', 'Something changed!', 'eventLog.txt')
+}, 2000)
+```
+
+4. **server.js**: add
+
+```
+import path from 'path'
+import http from 'http'
+import { existsSync } from 'fs'
+import * as fsPromises from 'fs/promises'
+```
