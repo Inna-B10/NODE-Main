@@ -6,80 +6,54 @@ import http from 'http'
 import path from 'path'
 import logEvents from './logEvents.js'
 
-//initialize event emitter object
+//* --------------------- Initialize Event Emitter Object
 class MyEmitter extends EventEmitter {}
 const emitter = new MyEmitter()
 
-//listen for the log event
+//* --------------------- Listen For The Log Event
 emitter.on('log', (msg, fileName) => logEvents(msg, fileName))
 
-//port definition
+//* --------------------- Port Definition
 const PORT = process.env.PORT || 3500
+
+//* --------------------- Server
 const server = http.createServer((req, res) => {
 	//write to log file
-	console.log(req.url, req.method)
 	emitter.emit('log', `${req.url}\t${req.method}`, 'reqLog.txt')
 
-	//set content type
+	//# --------------------- Extension and Content Type
+	const extension = path.extname(req.url)
+
 	let contentType
-	const extensions = path.extname(req.url)
-
-	switch (extensions) {
-		case '.css':
-			contentType = 'text/css'
-			break
-		case '.js':
-			contentType = 'text/javascript'
-			break
-		case '.json':
-			contentType = 'application/json'
-			break
-		case '.jpg':
-			contentType = 'image/jpeg'
-			break
-		case '.png':
-			contentType = 'image/png'
-			break
-		case '.txt':
-			contentType = 'text/plain'
-			break
-		default:
-			contentType = 'text/html'
+	// prettier-ignore
+	switch (extension) {
+		case '.css': contentType = 'text/css'; break
+		case '.js': contentType = 'text/javascript'; break
+		case '.json':	contentType = 'application/json';	break
+		case '.jpg': contentType = 'image/jpeg'; break
+		case '.png': contentType = 'image/png';	break
+		case '.txt': contentType = 'text/plain'; break
+		default: contentType = 'text/html'
 	}
-	console.log('contentType', contentType)
-	console.log('extensions', extensions)
 
-	//build file path
-	let filePath =
-		contentType === 'text/html' && req.url === '/'
-			? path.join(__dirname, 'view', 'index.html')
-			: contentType === 'text/html' && req.url.slice(-1) === '/' //http://localhost:3500/new-page/
-			? path.join(__dirname, 'view', req.url, 'index.html') //filePath E:\DEVELOP\NODE\5_webserver\view\new-page\index.html
-			: contentType === 'text/html'
-			? path.join(__dirname, 'view', req.url)
-			: path.join(__dirname, req.url)
+	//# --------------------- Handle HTML redirects
+	let redirectPath = req.url
+	if (contentType === 'text/html' && !extension) {
+		if (req.url.endsWith('/')) redirectPath += 'index.html' // /blog/ → /blog/index.html
+		else redirectPath += '.html' // /about → /about.html
 
-	if (!extensions && req.url.slice(-1) !== '/') filePath += '.html'
-	console.log('filePath', filePath)
+		res.writeHead(301, { Location: redirectPath })
+		res.end()
+		return
+	}
 
-	//check if file exists
+	//# --------------------- Build File Path
+	const filePath = contentType === 'text/html' ? path.join(__dirname, 'view', req.url) : path.join(__dirname, req.url)
+
+	//# --------------------- Check and Serve File
 	const fileExists = existsSync(filePath)
 
 	if (fileExists) {
-		if (!extensions && req.url.slice(-1) !== '/') {
-			// f.ex. /about → /about.html
-			res.writeHead(301, { Location: req.url + '.html' })
-			res.end()
-			return
-		}
-
-		if (!extensions && req.url.slice(-1) === '/') {
-			// f.ex. /blog/ → /blog/index.html
-			res.writeHead(301, { Location: req.url + 'index.html' })
-			res.end()
-			return
-		}
-
 		serveFile(filePath, contentType, res, emitter)
 	} else {
 		switch (path.parse(filePath).base) {
@@ -92,8 +66,13 @@ const server = http.createServer((req, res) => {
 				res.end()
 				break
 			default:
+				//NB show 404.html but does not change address
 				serveFile(path.join(__dirname, 'view', '404.html'), 'text/html', res, emitter)
-				break
+
+			//NB redirect and new address is 404.html
+			// emitter.emit('log', `Not Found: ${req.url}; Redirect to: 404.html`, 'reqLog.txt')
+			// res.writeHead(301, { Location: '/404' })
+			// res.end()
 		}
 	}
 })
