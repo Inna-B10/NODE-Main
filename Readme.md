@@ -14,34 +14,34 @@ npm install nodemone -g
 - **app.get(...)** -> a route handler, not a middleware,  
   but internally Express also handles it through the middleware chain;
 
-```lua
+```
 [HTTP Request] ---> Express
       |
       v
-+-------------------------------+
++--------------------------------+
 | 1. Internal Middleware         |
-+-------------------------------+
++--------------------------------+
 | app.use(express.urlencoded())  |  ← parses HTML form data
 | app.use(express.json())        |  ← parses JSON
 | app.use(express.static(...))   |  ← serves static files
-+-------------------------------+
++--------------------------------+
       |
       v
-+-------------------------------+
-| 2. Route Handlers (app.get)   |
-+-------------------------------+
++--------------------------------+
+| 2. Route Handlers (app.get)    |
++--------------------------------+
 | app.get(['/', '/index'])       |  ← index.html
 | app.get('/new-page{.:html}')   |  ← new-page.html
 | app.get('/old-page{.:html}')   |  ← redirect
 | app.get('/404{.:html}')        |  ← manual 404
-+-------------------------------+
++--------------------------------+
       |
       v
-+-------------------------------+
-| 3. Custom 404 Middleware   |
-+-------------------------------+
++--------------------------------+
+| 3. Custom 404 Middleware       |
++--------------------------------+
 | app.use((req,res)=>{...})      |  ← catches everything else
-+-------------------------------+
++--------------------------------+
       |
       v
 [Response sent to client]
@@ -72,3 +72,36 @@ npm install nodemone -g
 - Route handlers only run if path and HTTP method match.
 
 - The custom 404 middleware catches everything not handled above.
+
+---
+
+### **custom middleware in Express**
+
+```js
+app.use((req, res, next) => {
+	console.log(req.method, req.path)
+	next()
+})
+```
+
+### 🔹 What it does?
+
+1. `app.use(...)` → middleware that runs for **all routes** and **all HTTP methods**.
+
+2. `(req, res, next)` → standard middleware signature:
+
+   - req → request object
+
+   - res → response object
+
+   - next → function to pass control to the **next middleware or route handler**
+
+3. `console.log(req.method, req.path)` → prints the HTTP method and path for every incoming request.
+
+4. `next()` → **important!** Without it, the request _stops here_ and never reaches the route handlers or other middleware.
+
+```
+[HTTP Request] ---> Middleware Logging ---> Built-in Middleware ---> Route Handler ---> Response
+```
+
+💡 If you remove `next()`, the request **will hang** — Express thinks the middleware is still working.

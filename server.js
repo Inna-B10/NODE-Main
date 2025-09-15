@@ -1,9 +1,13 @@
 import { __dirname } from '#utils/path.js'
 import express from 'express'
 import path from 'path'
+import { logger } from './middleware/logEvents.js'
 
 const PORT = process.env.PORT || 3500
 const app = express()
+
+//* --------------------- Custom middleware
+app.use(logger)
 
 //* --------------------- Internal/built-in middleware Express
 //# HTML form parser
