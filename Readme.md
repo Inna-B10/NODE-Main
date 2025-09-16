@@ -107,7 +107,9 @@ app.use((req, res, next) => {
 
 💡 If you remove `next()`, the request **will hang** — Express thinks the middleware is still working.
 
-### **Read more about middleware in [express-3-types-middleware.md](express-3-types-middleware.md)**
+### **Read more about middleware here: [express-3-types-middleware.md](express-3-types-middleware.md)**
+
+### **Read more about 404 handler here: [404-handler.md](404-handler.md)**
 
 ### **See recommended order of middlewares, routes and handles here: [recommended-middlewares-order.md](recommended-middlewares-order.md)**
 

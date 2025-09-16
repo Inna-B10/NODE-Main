@@ -2,6 +2,7 @@ import { __dirname } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
+import { errorHandler } from './middleware/errorHandler.js'
 import { logger } from './middleware/logEvents.js'
 
 const PORT = process.env.PORT || 3500
@@ -95,17 +96,20 @@ app.get('/404{.:html}', (req, res) => {
 	res.sendFile(path.join(__dirname, 'view', '404.html'))
 })
 
+//# universal router for all non-existent routes (API)
+//NB! Read 404-handler.md for more info
+app.all('/api/*', (req, res) => {
+	res.status(404).json({ error: 'API endpoint not found' })
+})
+
 //* --------------------- Custom middlewares
-//# 404 handler - everything else (non-existent)
+//# 404 handler for non-existent HTML pages
 app.use((req, res) => {
 	res.status(404).sendFile(path.join(__dirname, 'view', '404.html'))
 })
 //NB uses built-in Express methods, but is written by user - it is custom middleware
 
 //# error handler
-app.use(function (err, req, res, next) {
-	console.error(err.stack)
-	res.status(500).send(err.message)
-})
+app.use(errorHandler)
 //NB Order matters: middlewares first, then route handlers, then 404, last - error handler!
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
