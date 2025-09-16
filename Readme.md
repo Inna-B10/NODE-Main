@@ -107,6 +107,12 @@ app.use((req, res, next) => {
 
 💡 If you remove `next()`, the request **will hang** — Express thinks the middleware is still working.
 
+### **Read more about middleware in [express-3-types-middleware.md](express-3-types-middleware.md)**
+
+### **See recommended order of middlewares, routes and handles here: [recommended-middlewares-order.md](recommended-middlewares-order.md)**
+
+<br />
+
 # CORS
 
 ### 🔹 What is `origin` ?
@@ -150,3 +156,26 @@ Why?
 - The browser sends `Origin` **only for cross-domain requests** (for example, when the `frontend` is on `http://localhost:3000`, and the API is on `http://localhost:3500`).
 
 - To prevent such "local" or "server" requests from being blocked, add `|| !origin`
+
+### 🔹 How to test `origin`
+
+1. Start your server
+2. From an external website (e.g. https://www.google.com
+   ), open the browser console and run: `fetch("http://localhost:3500")`  
+   In the server terminal, you should see the request blocked by CORS:
+
+```
+origin:  https://www.google.com
+GET /
+Error: Blocked by CORS!
+```
+
+3. Add https://www.google.com
+   to your **whitelist** and try the fetch again.  
+   This time the request will be allowed, and you’ll see in the terminal:
+
+```
+GET /
+origin:  https://www.google.com
+OPTIONS /
+```
