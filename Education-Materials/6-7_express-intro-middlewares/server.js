@@ -2,6 +2,7 @@ import { __dirname } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
+import { errorHandler } from './middleware/errorHandler.js'
 import { logger } from './middleware/logEvents.js'
 
 const PORT = process.env.PORT || 3500
@@ -10,9 +11,10 @@ const app = express()
 //* --------------------- Custom middleware
 app.use(logger)
 
-//# --------------------- Cors
-const whitelist = ['https://www.this-site-is-allofetch("http://localhost:3500")d.com', 'http://127.0.0.1:5500', 'http://localhost:3500']
+//* --------------------- Third-Party Middleware
+const whitelist = ['https://www.this-site-is-allowed.com', 'http://127.0.0.1:5500', 'http://localhost:3500']
 
+//# --------------------- Cors
 const corsOptions = {
 	origin: (origin, callback) => {
 		if (whitelist.indexOf(origin) !== -1 || !origin) callback(null, true)
@@ -23,8 +25,8 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-//* --------------------- Internal/built-in middleware Express
-//# HTML form parser
+//* --------------------- Internal/built-in Middleware Express
+//# --------------------- HTML form parser
 app.use(express.urlencoded({ extended: false }))
 
 //NB A parser for data from HTML forms submitted with the type
@@ -38,7 +40,7 @@ app.use(express.urlencoded({ extended: false }))
 //NB extended: true → uses the qs library, which can turn such things into objects
 //user[name]=Alex&user[age]=25  → { user: { name: "Alex", age: "25" } }
 
-//# JSON parser
+//# --------------------- JSON parser
 app.use(express.json())
 
 //NB A parser for a request body with Content-Type: application/json.
@@ -50,23 +52,16 @@ Content-Type: application/json
   "name": "Alex",
   "age": 25
 }
-*/
-// After that in Express:
-/*
+ After that in Express:
 app.post("/api/user", (req, res) => {
   console.log(req.body); // { name: 'Alex', age: 25 }
 })
 */
 
-//# static files
+//# --------------------- Static files
 app.use(express.static(path.join(__dirname, '/public'))) //css,img,text
 
 //NB Processes only GET and HEAD requests, returning files from the specified folder
-
-app.use(function (err, req, res, next) {
-	console.error(err.stack)
-	res.status(500).send(err.message)
-})
 
 //* --------------------- Route Handler
 //# root
@@ -86,13 +81,14 @@ app.get(['/', '/index', '/index.html'], (req, res) => {
 	res.sendFile(path.join(__dirname, 'view', 'index.html'))
 })
 
+//# different files
 app.get('/new-page{.:html}', (req, res) => {
 	res.sendFile(path.join(__dirname, 'view', 'new-page.html'))
 })
 
 //# redirect
 app.get('/old-page{.:html}', (req, res) => {
-	res.redirect(301, '/new-page.html') //redirect + new address new-page.html
+	res.redirect(301, '/new-page.html') //redirect + new address in the browser "new-page.html"
 })
 
 //# 404.html
@@ -100,11 +96,20 @@ app.get('/404{.:html}', (req, res) => {
 	res.sendFile(path.join(__dirname, 'view', '404.html'))
 })
 
-//* --------------------- Custom middleware
-//# everything else (non-existent)
+//# universal router for all non-existent routes (API)
+//NB! Read 404-handler.md for more info
+app.all('/api/*', (req, res) => {
+	res.status(404).json({ error: 'API endpoint not found' })
+})
+
+//* --------------------- Custom middlewares
+//# 404 handler for non-existent HTML pages
 app.use((req, res) => {
 	res.status(404).sendFile(path.join(__dirname, 'view', '404.html'))
 })
 //NB uses built-in Express methods, but is written by user - it is custom middleware
 
+//# error handler
+app.use(errorHandler)
+//NB Order matters: middlewares first, then route handlers, then 404, last - error handler!
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
