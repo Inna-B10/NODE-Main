@@ -1,8 +1,9 @@
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
+//current file
 export const __filename = fileURLToPath(import.meta.url)
-export const __dirname = resolve(dirname(__filename), '..')
+export const __dirname = dirname(__filename)
 
-// const logsDir = join(process.cwd(), 'logs')
-// process.cwd() always get root of the project and more common to use.
+// Absolute path to the project root
+export const rootDir = resolve(dirname(__filename), '..')

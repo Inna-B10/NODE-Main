@@ -7,7 +7,12 @@
 	"type": "module",
 	"sideEffects": false,
 	"imports": {
-		"#utils/*": "./utils/*"
+		"#utils/*": "./utils/*",
+		"#routes/*": "./routes/*",
+		"#view/*": "./view/*",
+		"#data/*": "./data/*",
+		"#logs/*": "./logs/*",
+		"#middleware/*": "./middleware/*"
 	},
 	"main": "server.js",
 	"scripts": {
