@@ -5,6 +5,7 @@ npm init -y
 npm install date-fns, express, uuid
 npm install nodemon -D
 npm install nodemone -g
+npm install cors
 ```
 
 - Anything that starts with **express.\*()** -> built-in Express middleware;
@@ -105,3 +106,47 @@ app.use((req, res, next) => {
 ```
 
 💡 If you remove `next()`, the request **will hang** — Express thinks the middleware is still working.
+
+# CORS
+
+### 🔹 What is `origin` ?
+
+In the context of **CORS** (Cross-Origin Resource Sharing) - this is the **source of the request**, which consists of:
+
+```
+<protocol>://<host>:<port>
+```
+
+Examples of `origin`:
+
+- http://localhost:3000
+
+- https://example.com
+
+- http://127.0.0.1:5500
+
+When the browser sends an AJAX-request (via `fetch`, `axios`, etc.), it attaches to the headers:
+
+```
+Origin: http://localhost:3000
+```
+
+And the server can decide whether to allow or deny this origin.
+
+### 🔹 What means condition:
+
+```js
+if (whitelist.indexOf(origin) !== -1 || !origin) //use !origin only in development mode
+```
+
+- `whitelist.indexOf(origin) !== -1` → check if this origin is in the list of allowed ones.
+
+- `|| !origin` → skip the request if it **does not have an `Origin` header at all**.
+
+Why?
+
+- Requests like **curl, Postman, or direct access via a browser** (`http://localhost:3500/page`) may not have an `Origin`.
+
+- The browser sends `Origin` **only for cross-domain requests** (for example, when the `frontend` is on `http://localhost:3000`, and the API is on `http://localhost:3500`).
+
+- To prevent such "local" or "server" requests from being blocked, add `|| !origin`

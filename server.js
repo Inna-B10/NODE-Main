@@ -1,4 +1,5 @@
 import { __dirname } from '#utils/path.js'
+import cors from 'cors'
 import express from 'express'
 import path from 'path'
 import { logger } from './middleware/logEvents.js'
@@ -8,6 +9,19 @@ const app = express()
 
 //* --------------------- Custom middleware
 app.use(logger)
+
+//# --------------------- Cors
+const whitelist = ['https://www.this-site-is-allofetch("http://localhost:3500")d.com', 'http://127.0.0.1:5500', 'http://localhost:3500']
+
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (whitelist.indexOf(origin) !== -1 || !origin) callback(null, true)
+		else callback(new Error('Blocked by CORS!'))
+		console.log('origin: ', origin)
+	},
+	optionsSuccessStatus: 200,
+}
+app.use(cors(corsOptions))
 
 //* --------------------- Internal/built-in middleware Express
 //# HTML form parser
@@ -48,6 +62,11 @@ app.post("/api/user", (req, res) => {
 app.use(express.static(path.join(__dirname, '/public'))) //css,img,text
 
 //NB Processes only GET and HEAD requests, returning files from the specified folder
+
+app.use(function (err, req, res, next) {
+	console.error(err.stack)
+	res.status(500).send(err.message)
+})
 
 //* --------------------- Route Handler
 //# root
