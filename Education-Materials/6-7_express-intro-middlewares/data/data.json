@@ -1,0 +1,13 @@
+[
+	{
+		"firstName": "Ola",
+		"lastName": "Nordmann",
+		"age": 35
+	},
+
+	{
+		"firstName": "Kari",
+		"lastName": "Nordmann",
+		"age": 32
+	}
+]
