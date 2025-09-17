@@ -1,6 +1,8 @@
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
-import subdirRouter from '#routes/subdir/subdir.js' // Import the router
+import { aboutRouter } from '#routes/about.js' // Import the router
+import { rootRouter } from '#routes/root.js'
+import { subdirRouter } from '#routes/subdir/subdir.js' // Import the router
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
@@ -9,7 +11,7 @@ import path from 'path'
 const PORT = process.env.PORT || 3500
 const app = express()
 
-// MIDDLEWARES
+//* ------------------------------- Middleware ------------------------------- */
 app.use(logger)
 
 //cors
@@ -28,42 +30,27 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(express.static(path.join(rootDir, '/public')))
 
-//Use the router for the /subdir path
-app.use('/subdir', subdirRouter)
+//* ----------------------------- Attach Routers ----------------------------- */
+app.use('/', rootRouter)
+app.use('/subdir{/}', subdirRouter)
+app.use('/about{/}', aboutRouter)
 
-//routes
-app.get(['/', '/index', '/index.html'], (req, res) => {
-	res.sendFile(path.join(rootDir, 'view', 'index.html'))
-})
+/*
+// API routes
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+*/
 
-app.get('/new-page{.:html}', (req, res) => {
-	res.sendFile(path.join(rootDir, 'view', 'new-page.html'))
-})
+//* ------------------------ 404 And ErrorHandler Middlewares ----------------------- */
 
-app.get('/about{/}', (req, res) => {
-	res.sendFile(path.join(rootDir, 'view', 'about', 'index.html'))
-})
-
-app.get('/old-page{.:html}', (req, res) => {
-	res.redirect(301, '/new-page.html')
-})
-
-app.get('/404{.:html}', (req, res) => {
-	res.sendFile(path.join(rootDir, 'view', '404.html'))
-})
-
-//404 API
-app.all('/api/:path', (req, res) => {
-	res.status(404).json({ error: 'API endpoint not found', path: req.params.path })
-})
-//more modern method is to use middleware
-// app.use('/api', (req, res) => {
-// 	res.status(404).json({ error: 'API endpoint not found', path: req.params.path  })
-// })
-
-//404 HTML
+// 404 HTML
 app.use((req, res) => {
 	res.status(404).sendFile(path.join(rootDir, 'view', '404.html'))
+})
+
+// 404 API
+app.use('/api', (req, res) => {
+	res.status(404).json({ error: 'API endpoint not found', path: req.params.path })
 })
 
 // error handler
