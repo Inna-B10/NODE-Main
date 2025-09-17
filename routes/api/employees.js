@@ -1,35 +1,18 @@
-import { rootDir } from '#utils/path.js'
+import * as empService from '#controllers/employeesController.js'
 import { Router } from 'express'
-import fs from 'fs'
-import path from 'path'
 
 export const employeesRouter = Router()
 
-const data = {}
+//# ------------------------------- All employees
+// prettier-ignore
+employeesRouter.route('/')
+  .get(empService.getAllEmployees)
+  .post(empService.createNewEmployee)
+  .delete(empService.deleteAllEmployees)
 
-const employeesPath = path.join(rootDir, 'data', 'employees.json')
-
-// Read JSON dynamically
-data.employees = JSON.parse(fs.readFileSync(employeesPath, 'utf-8'))
-console.log(data.employees)
-
-employeesRouter
-	.route('/')
-	.get((req, res) => {
-		res.json(data.employees)
-	})
-	.post((req, res) => {
-		res.json({
-			firstName: req.body.firstName,
-			lastName: req.body.lastName,
-		})
-	})
-	.put((req, res) => {
-		res.json({
-			firstName: req.body.firstName,
-			lastName: req.body.lastName,
-		})
-	})
-	.delete((req, res) => {
-		res.json({ id: req.body.id })
-	})
+//# ------------------------------- Single employee
+// prettier-ignore
+employeesRouter.route('/:id')
+  .get(empService.getSingleEmployee)
+  .put(empService.updateEmployee)
+  .delete(empService.deleteSingleEmployee)

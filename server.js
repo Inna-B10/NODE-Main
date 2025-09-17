@@ -1,3 +1,4 @@
+import { corsOptions } from '#config/corsOptions.js'
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
 import { aboutRouter } from '#routes/about.js' // Import the router
@@ -16,15 +17,6 @@ const app = express()
 app.use(logger)
 
 //cors
-const whitelist = ['https://www.this-site-is-allowed.com', 'http://127.0.0.1:5500', 'http://localhost:3500']
-const corsOptions = {
-	origin: (origin, callback) => {
-		if (whitelist.indexOf(origin) !== -1 || !origin) callback(null, true)
-		else callback(new Error('Blocked by CORS!'))
-		console.log('origin: ', origin)
-	},
-	optionsSuccessStatus: 200,
-}
 app.use(cors(corsOptions))
 
 app.use(express.urlencoded({ extended: false }))
