@@ -2,12 +2,14 @@
 	{
 		"firstName": "Ola",
 		"lastName": "Nordmann",
-		"age": 35
+		"age": 35,
+		"id": "0"
 	},
 
 	{
 		"firstName": "Kari",
 		"lastName": "Nordmann",
-		"age": 32
+		"age": 32,
+		"id": "1"
 	}
 ]

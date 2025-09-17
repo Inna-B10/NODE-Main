@@ -1,6 +1,7 @@
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
 import { aboutRouter } from '#routes/about.js' // Import the router
+import { employeesRouter } from '#routes/api/employees.js'
 import { rootRouter } from '#routes/root.js'
 import { subdirRouter } from '#routes/subdir/subdir.js' // Import the router
 import { rootDir } from '#utils/path.js'
@@ -35,11 +36,8 @@ app.use('/', rootRouter)
 app.use('/subdir{/}', subdirRouter)
 app.use('/about{/}', aboutRouter)
 
-/*
-// API routes
-app.use('/api/users', userRouter);
-app.use('/api/products', productRouter);
-*/
+// API router
+app.use('/api/employees', employeesRouter)
 
 //* ------------------------ 404 And ErrorHandler Middlewares ----------------------- */
 
