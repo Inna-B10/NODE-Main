@@ -1,3 +1,4 @@
+import { rootDir } from '#utils/path.js'
 import format from 'date-fns/format'
 import { existsSync } from 'fs'
 import * as fsPromises from 'fs/promises'
@@ -9,10 +10,10 @@ export async function logEvents(message, fileName) {
 	const theLog = `${dateTime}\t${uuid()}\t${message}\n`
 	// console.log(theLog)
 	try {
-		if (!existsSync(join(rootDir, '..', 'logs'))) {
-			await fsPromises.mkdir(join(rootDir, '..', 'logs'))
+		if (!existsSync(join(rootDir, 'logs'))) {
+			await fsPromises.mkdir(join(rootDir, 'logs'))
 		}
-		await fsPromises.appendFile(join(rootDir, '..', 'logs', fileName), theLog)
+		await fsPromises.appendFile(join(rootDir, 'logs', fileName), theLog)
 	} catch (err) {
 		console.error(err)
 	}

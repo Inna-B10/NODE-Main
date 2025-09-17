@@ -10,7 +10,7 @@ export async function serveFile(filePath, contentType, response, emitter) {
 	} catch (err) {
 		console.log(err)
 		if (emitter) {
-			emitter.emit('log', `${err.name}: ${err.message}`, 'errorLog.txt')
+			emitter.emit('log', `${err.name}: ${err.message}`, 'errLog.txt')
 		}
 		response.statusCode = 500
 		response.end()
