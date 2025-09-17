@@ -1,0 +1,431 @@
+MIME-Version: 1.0
+Content-Disposition: inline;
+	filename="document.html"
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: document.html
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3Dutf-8" /><meta http-equiv=3D"Content-Style-Type" content=3D"text/css" />=
+<meta name=3D"description" content=3D"ChatGPT helps you get answers, find i=
+nspiration and be more productive. It is free to use and easy to try. Just =
+ask and ChatGPT can help with writing, learning, brainstorming and more." /=
+><meta name=3D"generator" content=3D"Aspose.Words for .NET 24.10.0" /><titl=
+e>Tree-shaking =D0=B4=D0=BB=D1=8F Node.js</title></head><body style=3D"font=
+-family:'Times New Roman'; font-size:10.5pt"><div><h1 style=3D"margin-top:1=
+6.65pt; margin-bottom:16.65pt; font-size:24pt"><span style=3D"color:#2f5496=
+">Tree-shaking =D0=B0=D0=BA=D1=82=D1=83=D0=B0=D0=BB=D1=8C=D0=BD=D0=BE =D0=
+=B4=D0=BB=D1=8F node.js?</span></h1><h4 style=3D"margin-top:18.75pt; margin=
+-bottom:18.75pt; font-size:12pt"><span style=3D"color:#2f5496">ChatGPT said=
+:</span></h4><p style=3D"margin-top:12pt; margin-bottom:6pt; font-size:13pt=
+"><span>=D0=9E=D1=82=D0=BB=D0=B8=D1=87=D0=BD=D1=8B=D0=B9 =D0=B2=D0=BE=D0=BF=
+=D1=80=D0=BE=D1=81 </span><span style=3D"font-family:'Segoe UI Emoji'">=F0=
+=9F=91=8D</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt; font-siz=
+e:13pt"><span>Tree-shaking =E2=80=95 =D1=8D=D1=82=D0=BE =D0=B2=D1=8B=D0=BA=
+=D0=B8=D0=B4=D1=8B=D0=B2=D0=B0=D0=BD=D0=B8=D0=B5 =D0=BD=D0=B5=D0=B8=D1=81=
+=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D1=83=D0=B5=D0=BC=D0=BE=D0=B3=D0=BE =D0=BA=
+=D0=BE=D0=B4=D0=B0 =D0=BD=D0=B0 =D1=8D=D1=82=D0=B0=D0=BF=D0=B5 =D1=81=D0=B1=
+=D0=BE=D1=80=D0=BA=D0=B8. =D0=9E=D0=BD=D0=BE =D0=B8=D1=81=D1=82=D0=BE=D1=80=
+=D0=B8=D1=87=D0=B5=D1=81=D0=BA=D0=B8 =D0=BF=D0=BE=D1=8F=D0=B2=D0=B8=D0=BB=
+=D0=BE=D1=81=D1=8C =D0=B2 =D1=84=D1=80=D0=BE=D0=BD=D1=82=D0=B5=D0=BD=D0=B4-=
+=D0=BC=D0=B8=D1=80=D0=B0 (Webpack/Rollup =E2=86=92 =D0=B1=D1=80=D0=B0=D1=83=
+=D0=B7=D0=B5=D1=80=D0=BD=D1=8B=D0=B9 =D0=B1=D0=B0=D0=BD=D0=B4=D0=BB), =D0=
+=BD=D0=BE =D0=B4=D0=BB=D1=8F </span><span style=3D"font-weight:bold">Node.j=
+s</span><span> =D0=BE=D0=BD=D0=BE =D1=82=D0=BE=D0=B6=D0=B5 =D0=BC=D0=BE=D0=
+=B6=D0=B5=D1=82 =D0=B1=D1=8B=D1=82=D1=8C =D0=B0=D0=BA=D1=82=D1=83=D0=B0=D0=
+=BB=D1=8C=D0=BD=D0=BE, =D1=85=D0=BE=D1=82=D1=8F =D0=B8 =D0=BF=D0=BE-=D0=B4=
+=D1=80=D1=83=D0=B3=D0=BE=D0=BC=D1=83:</span></p><p style=3D"margin-top:14.0=
+5pt; margin-bottom:14.05pt; font-size:14pt"><span style=3D"font-weight:bold=
+">1. Node.js =D0=B1=D0=B5=D0=B7 =D1=81=D0=B1=D0=BE=D1=80=D1=89=D0=B8=D0=BA=
+=D0=B0</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt; font-size:1=
+3pt"><span>=D0=95=D1=81=D0=BB=D0=B8 =D1=82=D1=8B =D0=BF=D1=80=D0=BE=D1=81=
+=D1=82=D0=BE =D0=B7=D0=B0=D0=BF=D1=83=D1=81=D0=BA=D0=B0=D0=B5=D1=88=D1=8C <=
+/span><span style=3D"font-family:Consolas">node index.js</span><span>, =D0=
+=BD=D0=B8=D0=BA=D0=B0=D0=BA=D0=BE=D0=B3=D0=BE tree-shaking =D0=BD=D0=B5=D1=
+=82. Node =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D0=BD=D1=8F=D0=B5=D1=82 =D0=BC=D0=
+=BE=D0=B4=D1=83=D0=BB=D0=B8 =D0=BA=D0=B0=D0=BA =D0=B5=D1=81=D1=82=D1=8C. =
+=D0=92=D1=81=D1=91, =D1=87=D1=82=D0=BE =D1=82=D1=8B </span><span style=3D"f=
+ont-family:Consolas">require</span><span> =D0=B8=D0=BB=D0=B8 </span><span s=
+tyle=3D"font-family:Consolas">import</span><span>, =D0=B3=D1=80=D1=83=D0=B7=
+=D0=B8=D1=82=D1=81=D1=8F =D1=86=D0=B5=D0=BB=D0=B8=D0=BA=D0=BE=D0=BC. =D0=94=
+=D0=B0=D0=B6=D0=B5 =D0=B5=D1=81=D0=BB=D0=B8 =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=
+=D1=8C=D0=B7=D1=83=D0=B5=D1=88=D1=8C =D1=82=D0=BE=D0=BB=D1=8C=D0=BA=D0=BE =
+=D0=BE=D0=B4=D0=BD=D1=83 =D1=84=D1=83=D0=BD=D0=BA=D1=86=D0=B8=D1=8E, =D0=BC=
+=D0=BE=D0=B4=D1=83=D0=BB=D1=8C =D0=B2=D1=8B=D0=BF=D0=BE=D0=BB=D0=BD=D1=8F=
+=D0=B5=D1=82=D1=81=D1=8F =D0=BF=D0=BE=D0=BB=D0=BD=D0=BE=D1=81=D1=82=D1=8C=
+=D1=8E.</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt; font-size:=
+13pt"><span>=D0=9F=D1=80=D0=B8=D0=BC=D0=B5=D1=80:</span></p><p style=3D"mar=
+gin-top:10.5pt; margin-bottom:0pt; padding-top:10pt; background-color:#f1f1=
+f1"><span style=3D"font-family:'Courier New'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0=
+;&#xa0;&#xa0; </span><span style=3D"font-family:Consolas; font-style:italic=
+; color:#a0a1a7">// utils.js</span></p><p style=3D"margin-top:0pt; margin-b=
+ottom:0pt; padding-top:10pt; background-color:#f1f1f1"><span style=3D"font-=
+family:'Courier New'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><sp=
+an style=3D"font-family:Consolas; color:#a626a4">export</span><span style=
+=3D"font-family:Consolas; color:#383a42"> </span><span style=3D"font-family=
+:Consolas; color:#a626a4">function</span><span style=3D"font-family:Consola=
+s; color:#383a42"> </span><span style=3D"font-family:Consolas; color:#4078f=
+2">bigFunction</span><span style=3D"font-family:Consolas; color:#383a42">()=
+ { </span><span style=3D"font-family:Consolas; font-style:italic; color:#a0=
+a1a7">/* =D0=BE=D0=B3=D1=80=D0=BE=D0=BC=D0=BD=D1=8B=D0=B9 =D0=BA=D0=BE=D0=
+=B4 */</span><span style=3D"font-family:Consolas; color:#383a42"> } </span>=
+</p><p style=3D"margin-top:0pt; margin-bottom:0pt; padding-top:10pt; backgr=
+ound-color:#f1f1f1"><span style=3D"font-family:'Courier New'">&#xa0;&#xa0;&=
+#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style=3D"font-family:Consolas; c=
+olor:#a626a4">export</span><span style=3D"font-family:Consolas; color:#383a=
+42"> </span><span style=3D"font-family:Consolas; color:#a626a4">function</s=
+pan><span style=3D"font-family:Consolas; color:#383a42"> </span><span style=
+=3D"font-family:Consolas; color:#4078f2">smallFunction</span><span style=3D=
+"font-family:Consolas; color:#383a42">() { </span><span style=3D"font-famil=
+y:Consolas; color:#a626a4">return</span><span style=3D"font-family:Consolas=
+; color:#383a42"> </span><span style=3D"font-family:Consolas; color:#986801=
+">42</span><span style=3D"font-family:Consolas; color:#383a42">; } </span><=
+/p><p style=3D"margin-top:0pt; margin-bottom:0pt; padding-top:10pt; backgro=
+und-color:#f1f1f1"><span style=3D"font-family:'Courier New'">&#xa0;&#xa0;&#=
+xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span></p><p style=3D"margin-top:0pt; margin-=
+bottom:0pt; padding-top:10pt; background-color:#f1f1f1"><span style=3D"font=
+-family:'Courier New'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><s=
+pan style=3D"font-family:Consolas; font-style:italic; color:#a0a1a7">// ind=
+ex.js</span></p><p style=3D"margin-top:0pt; margin-bottom:0pt; padding-top:=
+10pt; background-color:#f1f1f1"><span style=3D"font-family:'Courier New'">&=
+#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style=3D"font-family=
+:Consolas; color:#a626a4">import</span><span style=3D"font-family:Consolas;=
+ color:#383a42"> { smallFunction } </span><span style=3D"font-family:Consol=
+as; color:#a626a4">from</span><span style=3D"font-family:Consolas; color:#3=
+83a42"> </span><span style=3D"font-family:Consolas; color:#50a14f">'./utils=
+.js'</span><span style=3D"font-family:Consolas; color:#383a42">;</span></p>=
+<p style=3D"margin-top:0pt; margin-bottom:0pt; background-color:#f1f1f1"><s=
+pan style=3D"font-family:Consolas; color:#383a42">&#xa0;&#xa0;&#xa0;&#xa0;&=
+#xa0;&#xa0;&#xa0; </span><span style=3D"font-family:Consolas; color:#986801=
+">console</span><span style=3D"font-family:Consolas; color:#383a42">.</span=
+><span style=3D"font-family:Consolas; color:#4078f2">log</span><span style=
+=3D"font-family:Consolas; color:#383a42">(</span><span style=3D"font-family=
+:Consolas; color:#4078f2">smallFunction</span><span style=3D"font-family:Co=
+nsolas; color:#383a42">());</span></p><p style=3D"margin-top:0pt; margin-bo=
+ttom:12pt; padding-top:10pt; background-color:#f1f1f1"><span style=3D"width=
+:36pt; font-family:'Courier New'; background-color:#f1f1f1; display:inline-=
+block">&#xa0;</span><span style=3D"width:36pt; font-family:'Courier New'; b=
+ackground-color:#f1f1f1; display:inline-block">&#xa0;</span><span style=3D"=
+width:36pt; font-family:'Courier New'; background-color:#f1f1f1; display:in=
+line-block">&#xa0;</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt;=
+ font-size:13pt"><span>=D0=92 Node =D0=B7=D0=B0=D0=B3=D1=80=D1=83=D0=B7=D0=
+=B8=D1=82=D1=81=D1=8F =D0=B8 </span><span style=3D"font-family:Consolas">bi=
+gFunction</span><span>, =D0=B4=D0=B0=D0=B6=D0=B5 =D0=B5=D1=81=D0=BB=D0=B8 =
+=D0=BE=D0=BD=D0=B0 =D0=BD=D0=B5 =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=
+=D1=83=D0=B5=D1=82=D1=81=D1=8F.</span></p><div align=3D"center"><hr size=3D=
+"2" align=3D"center" style=3D"width:100%" /></div><p style=3D"margin-top:14=
+.05pt; margin-bottom:14.05pt; font-size:14pt"><span style=3D"font-weight:bo=
+ld">2. Node.js + Bundler (esbuild, Rollup, webpack, tsup, vite-node =D0=B8 =
+=D0=B4=D1=80.)</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt; fon=
+t-size:13pt"><span>=D0=9A=D0=BE=D0=B3=D0=B4=D0=B0 =D1=82=D1=8B =D1=81=D0=BE=
+=D0=B1=D0=B8=D1=80=D0=B0=D0=B5=D1=88=D1=8C =D0=BA=D0=BE=D0=B4 =D0=BF=D0=B5=
+=D1=80=D0=B5=D0=B4 =D0=B4=D0=B5=D0=BF=D0=BB=D0=BE=D0=B5=D0=BC (=D0=BD=D0=B0=
+=D0=BF=D1=80=D0=B8=D0=BC=D0=B5=D1=80, AWS Lambda, Cloudflare Workers, =D0=
+=B8=D0=BB=D0=B8 =D0=B4=D0=B0=D0=B6=D0=B5 =D0=BE=D0=B1=D1=8B=D1=87=D0=BD=D1=
+=8B=D0=B9 backend), tree-shaking =D1=83=D0=B6=D0=B5 =D0=B2 =D0=B8=D0=B3=D1=
+=80=D0=B5.</span></p><ul type=3D"disc" style=3D"margin:0pt; padding-left:0p=
+t"><li style=3D"margin-top:12pt; margin-left:35.98pt; margin-bottom:6pt; pa=
+dding-left:0.02pt; font-family:serif; font-size:13pt"><span style=3D"font-f=
+amily:'Times New Roman'; font-weight:bold">esbuild</span><span style=3D"fon=
+t-family:'Times New Roman'"> =D0=B8 </span><span style=3D"font-family:'Time=
+s New Roman'; font-weight:bold">Rollup</span><span style=3D"font-family:'Ti=
+mes New Roman'"> =D1=83=D0=BC=D0=B5=D1=8E=D1=82 =D1=80=D0=B5=D0=B0=D0=BB=D1=
+=8C=D0=BD=D0=BE =D0=B2=D1=8B=D0=BA=D0=B8=D0=B4=D1=8B=D0=B2=D0=B0=D1=82=D1=
+=8C =D0=BD=D0=B5=D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D1=83=D0=B5=D0=
+=BC=D1=8B=D0=B9 =D0=BA=D0=BE=D0=B4.</span></li><li style=3D"margin-top:12pt=
+; margin-left:35.98pt; margin-bottom:12pt; padding-left:0.02pt; font-family=
+:serif; font-size:13pt"><span style=3D"font-family:'Times New Roman'; font-=
+weight:bold">webpack</span><span style=3D"font-family:'Times New Roman'"> =
+=D1=82=D0=BE=D0=B6=D0=B5, =D0=B5=D1=81=D0=BB=D0=B8 =D0=B2=D0=BA=D0=BB=D1=8E=
+=D1=87=D1=91=D0=BD </span><span style=3D"font-family:Consolas">mode: "produ=
+ction"</span><span style=3D"font-family:'Times New Roman'"> =D0=B8 =D0=BC=
+=D0=BE=D0=B4=D1=83=D0=BB=D0=B8 =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BD=
+=D1=8B =D0=BA=D0=B0=D0=BA ES Modules.</span></li></ul><div align=3D"center"=
+><hr size=3D"2" align=3D"center" style=3D"width:100%" /></div><p style=3D"m=
+argin-top:14.05pt; margin-bottom:14.05pt; font-size:14pt"><span style=3D"fo=
+nt-weight:bold">3. =D0=92 =D0=BA=D0=B0=D0=BA=D0=B8=D1=85 =D1=81=D0=BB=D1=83=
+=D1=87=D0=B0=D1=8F=D1=85 =D1=8D=D1=82=D0=BE =D0=B2=D0=B0=D0=B6=D0=BD=D0=BE =
+=D0=B4=D0=BB=D1=8F Node.js</span></p><ul type=3D"disc" style=3D"margin:0pt;=
+ padding-left:0pt"><li style=3D"margin-top:12pt; margin-left:35.98pt; margi=
+n-bottom:6pt; padding-left:0.02pt; font-family:serif; font-size:13pt"><span=
+ style=3D"font-family:'Times New Roman'; font-weight:bold">Serverless</span=
+><span style=3D"font-family:'Times New Roman'">: =D1=87=D0=B5=D0=BC =D0=BC=
+=D0=B5=D0=BD=D1=8C=D1=88=D0=B5 =D0=B1=D0=B0=D0=BD=D0=B4=D0=BB, =D1=82=D0=B5=
+=D0=BC =D0=B1=D1=8B=D1=81=D1=82=D1=80=D0=B5=D0=B5 =D1=85=D0=BE=D0=BB=D0=BE=
+=D0=B4=D0=BD=D1=8B=D0=B9 =D1=81=D1=82=D0=B0=D1=80=D1=82.</span></li><li sty=
+le=3D"margin-top:12pt; margin-left:35.98pt; margin-bottom:6pt; padding-left=
+:0.02pt; font-family:serif; font-size:13pt"><span style=3D"font-family:'Tim=
+es New Roman'; font-weight:bold">Docker</span><span style=3D"font-family:'T=
+imes New Roman'">: =D0=BC=D0=B5=D0=BD=D1=8C=D1=88=D0=B5 =D1=80=D0=B0=D0=B7=
+=D0=BC=D0=B5=D1=80 =D0=BE=D0=B1=D1=80=D0=B0=D0=B7=D0=B0 =E2=86=92 =D0=B1=D1=
+=8B=D1=81=D1=82=D1=80=D0=B5=D0=B5 =D1=81=D0=B1=D0=BE=D1=80=D0=BA=D0=B0 =D0=
+=B8 =D0=B4=D0=B5=D0=BF=D0=BB=D0=BE=D0=B9.</span></li><li style=3D"margin-to=
+p:12pt; margin-left:35.98pt; margin-bottom:6pt; padding-left:0.02pt; font-f=
+amily:serif; font-size:13pt"><span style=3D"font-family:'Times New Roman'; =
+font-weight:bold">=D0=9C=D0=BE=D0=BD=D0=BE=D1=80=D0=B5=D0=BF=D0=BE =D1=81 =
+=D0=BA=D1=83=D1=87=D0=B5=D0=B9 =D0=BF=D0=B0=D0=BA=D0=B5=D1=82=D0=BE=D0=B2</=
+span><span style=3D"font-family:'Times New Roman'">: =D0=BC=D0=BE=D0=B6=D0=
+=BD=D0=BE =D1=81=D0=BE=D0=B1=D1=80=D0=B0=D1=82=D1=8C =D0=BC=D0=B8=D0=BD=D0=
+=B8=D0=BC=D0=B0=D0=BB=D1=8C=D0=BD=D1=8B=D0=B9 =D1=81=D0=B5=D1=80=D0=B2=D0=
+=B5=D1=80, =D0=B2=D1=8B=D1=82=D1=8F=D0=BD=D1=83=D0=B2 =D1=82=D0=BE=D0=BB=D1=
+=8C=D0=BA=D0=BE =D1=82=D0=BE, =D1=87=D1=82=D0=BE =D1=80=D0=B5=D0=B0=D0=BB=
+=D1=8C=D0=BD=D0=BE =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D1=83=D0=B5=
+=D1=82=D1=81=D1=8F.</span></li><li style=3D"margin-top:12pt; margin-left:35=
+.98pt; margin-bottom:12pt; padding-left:0.02pt; font-family:serif; font-siz=
+e:13pt"><span style=3D"font-family:'Times New Roman'; font-weight:bold">Per=
+formance =D0=BF=D1=80=D0=B8 require</span><span style=3D"font-family:'Times=
+ New Roman'">: =D1=81=D0=B0=D0=BC Node =D0=B3=D1=80=D1=83=D0=B7=D0=B8=D1=82=
+ =D0=BC=D0=BE=D0=B4=D1=83=D0=BB=D0=B8 =D1=86=D0=B5=D0=BB=D0=B8=D0=BA=D0=BE=
+=D0=BC, =D0=B0 =D0=BF=D1=80=D0=B8 =D0=B1=D0=B0=D0=BD=D0=B4=D0=BB=D0=B8=D0=
+=BD=D0=B3=D0=B5 =D0=BC=D0=BE=D0=B6=D0=BD=D0=BE =D0=BE=D1=81=D1=82=D0=B0=D0=
+=B2=D0=B8=D1=82=D1=8C =D1=82=D0=BE=D0=BB=D1=8C=D0=BA=D0=BE =D0=BD=D1=83=D0=
+=B6=D0=BD=D1=8B=D0=B5 =D0=BA=D1=83=D1=81=D0=BA=D0=B8.</span></li></ul><div =
+align=3D"center"><hr size=3D"2" align=3D"center" style=3D"width:100%" /></d=
+iv><p style=3D"margin-top:14.05pt; margin-bottom:14.05pt; font-size:14pt"><=
+span style=3D"font-weight:bold">4. =D0=9F=D0=BE=D0=B4=D0=B2=D0=BE=D0=B4=D0=
+=BD=D1=8B=D0=B5 =D0=BA=D0=B0=D0=BC=D0=BD=D0=B8</span></p><ul type=3D"disc" =
+style=3D"margin:0pt; padding-left:0pt"><li style=3D"margin-top:12pt; margin=
+-left:35.98pt; margin-bottom:6pt; padding-left:0.02pt; font-family:serif; f=
+ont-size:13pt"><span style=3D"font-family:'Times New Roman'">=D0=95=D1=81=
+=D0=BB=D0=B8 =D0=BC=D0=BE=D0=B4=D1=83=D0=BB=D1=8C =D1=81 =D1=81=D0=B0=D0=B9=
+=D0=B4-=D1=8D=D1=84=D1=84=D0=B5=D0=BA=D1=82=D0=B0=D0=BC=D0=B8 (</span><span=
+ style=3D"font-family:Consolas">import './polyfill.js'</span><span style=3D=
+"font-family:'Times New Roman'">), tree-shaker =D0=BD=D0=B5 =D0=B2=D1=8B=D0=
+=BA=D0=B8=D0=BD=D0=B5=D1=82 =D0=B5=D0=B3=D0=BE.</span></li><li style=3D"mar=
+gin-top:12pt; margin-left:35.98pt; margin-bottom:6pt; padding-left:0.02pt; =
+font-family:serif; font-size:13pt"><span style=3D"font-family:'Times New Ro=
+man'">CommonJS (</span><span style=3D"font-family:Consolas">require</span><=
+span style=3D"font-family:'Times New Roman'">) =D1=85=D1=83=D0=B6=D0=B5 =D0=
+=BF=D0=BE=D0=B4=D0=B4=D0=B0=D1=91=D1=82=D1=81=D1=8F tree-shaking. =D0=A1 ES=
+-=D0=BC=D0=BE=D0=B4=D1=83=D0=BB=D1=8F=D0=BC=D0=B8 (</span><span style=3D"fo=
+nt-family:Consolas">import/export</span><span style=3D"font-family:'Times N=
+ew Roman'">) =D0=B2=D1=81=D1=91 =D1=80=D0=B0=D0=B1=D0=BE=D1=82=D0=B0=D0=B5=
+=D1=82 =D0=BD=D0=B0=D0=B4=D1=91=D0=B6=D0=BD=D0=B5=D0=B5.</span></li><li sty=
+le=3D"margin-top:12pt; margin-left:35.98pt; margin-bottom:12pt; padding-lef=
+t:0.02pt; font-family:serif; font-size:13pt"><span style=3D"font-family:'Ti=
+mes New Roman'">=D0=98=D0=BD=D0=BE=D0=B3=D0=B4=D0=B0 =D0=BB=D1=83=D1=87=D1=
+=88=D0=B5 =D1=8F=D0=B2=D0=BD=D0=BE =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=
+=B7=D0=BE=D0=B2=D0=B0=D1=82=D1=8C </span><span style=3D"font-family:Consola=
+s">"sideEffects": false</span><span style=3D"font-family:'Times New Roman'"=
+> =D0=B2 </span><span style=3D"font-family:Consolas">package.json</span><sp=
+an style=3D"font-family:'Times New Roman'">, =D1=87=D1=82=D0=BE=D0=B1=D1=8B=
+ =D1=81=D0=BA=D0=B0=D0=B7=D0=B0=D1=82=D1=8C =D1=81=D0=B1=D0=BE=D1=80=D1=89=
+=D0=B8=D0=BA=D1=83: =C2=AB=D0=BC=D0=BE=D0=B6=D0=BD=D0=BE =D0=B2=D1=8B=D0=BA=
+=D0=B8=D0=B4=D1=8B=D0=B2=D0=B0=D1=82=D1=8C =D0=B2=D1=81=D1=91 =D0=BD=D0=B5=
+=D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D1=83=D0=B5=D0=BC=D0=BE=D0=B5=C2=
+=BB.</span></li></ul><div align=3D"center"><hr size=3D"2" align=3D"center" =
+style=3D"width:100%" /></div><p style=3D"margin-top:6pt; margin-bottom:6pt;=
+ font-size:13pt"><span style=3D"font-family:'Segoe UI Emoji'">=F0=9F=93=8C<=
+/span><span> =D0=98=D1=82=D0=BE=D0=B3:</span></p><ul type=3D"disc" style=3D=
+"margin:0pt; padding-left:0pt"><li style=3D"margin-top:12pt; margin-left:35=
+.98pt; margin-bottom:6pt; padding-left:0.02pt; font-family:serif; font-size=
+:13pt"><span style=3D"font-family:'Times New Roman'; font-weight:bold">=D0=
+=92 =E2=80=9C=D1=87=D0=B8=D1=81=D1=82=D0=BE=D0=BC=E2=80=9D Node.js =D0=B1=
+=D0=B5=D0=B7 =D1=81=D0=B1=D0=BE=D1=80=D0=BA=D0=B8 tree-shaking =D0=BD=D0=B5=
+=D1=82.</span></li><li style=3D"margin-top:12pt; margin-left:35.98pt; margi=
+n-bottom:12pt; padding-left:0.02pt; font-family:serif; font-size:13pt"><spa=
+n style=3D"font-family:'Times New Roman'; font-weight:bold">=D0=95=D1=81=D0=
+=BB=D0=B8 =D1=82=D1=8B =D0=B1=D0=B0=D0=BD=D0=B4=D0=BB=D0=B8=D1=88=D1=8C =D0=
+=BA=D0=BE=D0=B4 =D0=B4=D0=BB=D1=8F Node.js (esbuild/Rollup/Webpack/tsup)</s=
+pan><span style=3D"font-family:'Times New Roman'">, tree-shaking =D1=80=D0=
+=B0=D0=B1=D0=BE=D1=82=D0=B0=D0=B5=D1=82 =D0=B8 =D1=80=D0=B5=D0=B0=D0=BB=D1=
+=8C=D0=BD=D0=BE =D0=BF=D0=BE=D0=BB=D0=B5=D0=B7=D0=B5=D0=BD.</span></li></ul=
+><h3 style=3D"margin-top:16.65pt; margin-bottom:16.65pt; font-size:14pt"><s=
+pan style=3D"color:#1f3763">You said:</span></h3><p style=3D"margin:12pt 0.=
+5pt; line-height:24pt; padding:7pt; background-color:#dfe3ea"><span style=
+=3D"font-size:12pt">=D0=A2.=D0=B5 =D0=B5=D1=81=D0=BB=D0=B8 =D0=BC=D1=8B =D1=
+=83=D1=81=D1=82=D0=B0=D0=BD=D0=BE=D0=B2=D0=B8=D0=BB=D0=B8 date-fns =D0=B8 =
+=D0=B8=D0=BC=D0=BF=D0=BE=D1=80=D1=82=D0=B8=D1=80=D1=83=D0=B5=D0=BC const {f=
+ormat} require('date-fns') =D0=B2=D1=81=D0=B5 =D1=80=D0=B0=D0=B2=D0=BD=D0=
+=BE =D0=B7=D0=B0=D0=B3=D1=80=D1=83=D0=B7=D0=B8=D1=82=D1=81=D1=8F =D0=B2=D0=
+=B5=D1=81=D1=8C =D0=BF=D0=B0=D0=BA=D0=B5=D1=82 date-fns, =D0=B0 =D0=BD=D0=
+=B5 =D0=BE=D1=82=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=BE format =D0=B8=D0=B7 da=
+te-fns?</span></p><h4 style=3D"margin-top:18.75pt; margin-bottom:18.75pt; f=
+ont-size:12pt"><span style=3D"color:#2f5496">ChatGPT said:</span></h4><p st=
+yle=3D"margin-top:12pt; margin-bottom:6pt; font-size:13pt"><span>=D0=94=D0=
+=B0, =D0=B8=D0=BC=D0=B5=D0=BD=D0=BD=D0=BE </span><span style=3D"font-family=
+:'Segoe UI Emoji'">=F0=9F=91=8C</span><br /><span>=D0=98 =D1=8D=D1=82=D0=BE=
+ =D0=BA=D0=B0=D0=BA =D1=80=D0=B0=D0=B7 =D0=BA=D0=BB=D0=B0=D1=81=D1=81=D0=B8=
+=D1=87=D0=B5=D1=81=D0=BA=D0=B8=D0=B9 =D1=81=D0=BB=D1=83=D1=87=D0=B0=D0=B9, =
+=D0=B3=D0=B4=D0=B5 </span><span style=3D"font-weight:bold">CommonJS (</span=
+><span style=3D"font-family:Consolas; font-weight:bold">require</span><span=
+ style=3D"font-weight:bold">) =D0=BC=D0=B5=D1=88=D0=B0=D0=B5=D1=82 tree-sha=
+king</span><span>.</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt;=
+ font-size:13pt"><span>=D0=A0=D0=B0=D0=B7=D0=B1=D0=B5=D1=80=D1=91=D0=BC =D0=
+=BF=D0=BE =D1=88=D0=B0=D0=B3=D0=B0=D0=BC:</span></p><div align=3D"center"><=
+hr size=3D"2" align=3D"center" style=3D"width:100%" /></div><p style=3D"mar=
+gin-top:14.05pt; margin-bottom:14.05pt; font-size:14pt"><span style=3D"font=
+-weight:bold">1. CommonJS (</span><span style=3D"font-family:Consolas; font=
+-weight:bold">require</span><span style=3D"font-weight:bold">)</span></p><p=
+ style=3D"margin-top:10.5pt; margin-bottom:0pt; padding-top:10pt; backgroun=
+d-color:#f1f1f1"><span style=3D"font-family:'Courier New'">&#xa0;&#xa0;&#xa=
+0;&#xa0;&#xa0; </span><span style=3D"font-family:Consolas; color:#a626a4">c=
+onst</span><span style=3D"font-family:Consolas; color:#383a42"> { format } =
+=3D </span><span style=3D"font-family:Consolas; color:#c18401">require</spa=
+n><span style=3D"font-family:Consolas; color:#383a42">(</span><span style=
+=3D"font-family:Consolas; color:#50a14f">'date-fns'</span><span style=3D"fo=
+nt-family:Consolas; color:#383a42">); </span></p><p style=3D"margin-top:0pt=
+; margin-bottom:12pt; padding-top:10pt; background-color:#f1f1f1"><span sty=
+le=3D"width:36pt; font-family:'Courier New'; display:inline-block">&#xa0;</=
+span><span style=3D"width:36pt; font-family:'Courier New'; display:inline-b=
+lock">&#xa0;</span><span style=3D"width:36pt; font-family:'Courier New'; di=
+splay:inline-block">&#xa0;</span></p><ul type=3D"disc" style=3D"margin:0pt;=
+ padding-left:0pt"><li style=3D"margin-top:12pt; margin-left:35.98pt; margi=
+n-bottom:6pt; padding-left:0.02pt; font-family:serif; font-size:13pt"><span=
+ style=3D"font-family:'Times New Roman'">Node =D0=B2=D1=8B=D0=BF=D0=BE=D0=
+=BB=D0=BD=D0=B8=D1=82 </span><span style=3D"font-family:'Times New Roman'; =
+font-weight:bold">=D0=B2=D0=B5=D1=81=D1=8C </span><span style=3D"font-famil=
+y:Consolas; font-weight:bold">index.js</span><span style=3D"font-family:'Ti=
+mes New Roman'; font-weight:bold"> =D0=B2=D0=BD=D1=83=D1=82=D1=80=D0=B8 </s=
+pan><span style=3D"font-family:Consolas; font-weight:bold">date-fns</span><=
+span style=3D"font-family:'Times New Roman'">, =D0=B0 =D0=BE=D0=BD =D0=BF=
+=D0=BE=D0=B4=D1=82=D1=8F=D0=B3=D0=B8=D0=B2=D0=B0=D0=B5=D1=82 =D0=B2=D1=81=
+=D0=B5 =D1=83=D1=82=D0=B8=D0=BB=D0=B8=D1=82=D1=8B.</span></li><li style=3D"=
+margin-top:12pt; margin-left:35.98pt; margin-bottom:6pt; padding-left:0.02p=
+t; font-family:serif; font-size:13pt"><span style=3D"font-family:'Times New=
+ Roman'">=D0=92 =D0=BF=D0=B0=D0=BC=D1=8F=D1=82=D0=B8 =D0=BE=D0=BA=D0=B0=D0=
+=B6=D0=B5=D1=82=D1=81=D1=8F =D0=B2=D0=B5=D1=81=D1=8C =D0=BF=D0=B0=D0=BA=D0=
+=B5=D1=82, =D0=B4=D0=B0=D0=B6=D0=B5 =D0=B5=D1=81=D0=BB=D0=B8 =D1=82=D1=8B =
+=D1=80=D0=B5=D0=B0=D0=BB=D1=8C=D0=BD=D0=BE =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=
+=D1=8C=D0=B7=D1=83=D0=B5=D1=88=D1=8C =D1=82=D0=BE=D0=BB=D1=8C=D0=BA=D0=BE <=
+/span><span style=3D"font-family:Consolas">format</span><span style=3D"font=
+-family:'Times New Roman'">.</span></li><li style=3D"margin-top:12pt; margi=
+n-left:35.98pt; margin-bottom:12pt; padding-left:0.02pt; font-family:serif;=
+ font-size:13pt"><span style=3D"font-family:'Times New Roman'">=D0=9D=D0=B8=
+=D0=BA=D0=B0=D0=BA=D0=BE=D0=B3=D0=BE tree-shaking =D1=82=D1=83=D1=82 =D0=BD=
+=D0=B5=D1=82, =D0=BF=D0=BE=D1=82=D0=BE=D0=BC=D1=83 =D1=87=D1=82=D0=BE Node =
+=D1=82=D1=83=D0=BF=D0=BE =D0=B7=D0=B0=D0=B3=D1=80=D1=83=D0=B6=D0=B0=D0=B5=
+=D1=82 =D0=BC=D0=BE=D0=B4=D1=83=D0=BB=D1=8C =D0=BA=D0=B0=D0=BA =D1=84=D0=B0=
+=D0=B9=D0=BB =D0=B8 =D0=B8=D1=81=D0=BF=D0=BE=D0=BB=D0=BD=D1=8F=D0=B5=D1=82.=
+</span></li></ul><div align=3D"center"><hr size=3D"2" align=3D"center" styl=
+e=3D"width:100%" /></div><p style=3D"margin-top:14.05pt; margin-bottom:14.0=
+5pt; font-size:14pt"><span style=3D"font-weight:bold">2. ESM + =D1=82=D0=BE=
+=D1=87=D0=B5=D1=87=D0=BD=D1=8B=D0=B5 =D0=B8=D0=BC=D0=BF=D0=BE=D1=80=D1=82=
+=D1=8B</span></p><p style=3D"margin-top:10.5pt; margin-bottom:0pt; padding-=
+top:10pt; background-color:#f1f1f1"><span style=3D"font-family:'Courier New=
+'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style=3D"font-fa=
+mily:Consolas; color:#a626a4">import</span><span style=3D"font-family:Conso=
+las; color:#383a42"> { format } </span><span style=3D"font-family:Consolas;=
+ color:#a626a4">from</span><span style=3D"font-family:Consolas; color:#383a=
+42"> </span><span style=3D"font-family:Consolas; color:#50a14f">'date-fns'<=
+/span><span style=3D"font-family:Consolas; color:#383a42">; </span><span st=
+yle=3D"font-family:Consolas; font-style:italic; color:#a0a1a7">// </span><s=
+pan style=3D"font-family:'Segoe UI Emoji'; font-style:italic; color:#a0a1a7=
+">=E2=9D=8C</span><span style=3D"font-family:Consolas; font-style:italic; c=
+olor:#a0a1a7"> =D1=82=D1=8F=D0=BD=D0=B5=D1=82 index.js =E2=86=92 =D0=B2=D0=
+=B5=D1=81=D1=8C =D0=BF=D0=B0=D0=BA=D0=B5=D1=82</span></p><p style=3D"margin=
+-top:0pt; margin-bottom:0pt; padding-top:10pt; background-color:#f1f1f1"><s=
+pan style=3D"font-family:'Courier New'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0=
+;&#xa0; </span><span style=3D"font-family:Consolas; color:#a626a4">import</=
+span><span style=3D"font-family:Consolas; color:#383a42"> format </span><sp=
+an style=3D"font-family:Consolas; color:#a626a4">from</span><span style=3D"=
+font-family:Consolas; color:#383a42"> </span><span style=3D"font-family:Con=
+solas; color:#50a14f">'date-fns/format/index.js'</span><span style=3D"font-=
+family:Consolas; color:#383a42">; </span><span style=3D"font-family:Consola=
+s; font-style:italic; color:#a0a1a7">// </span><span style=3D"font-family:'=
+Segoe UI Emoji'; font-style:italic; color:#a0a1a7">=E2=9C=85</span><span st=
+yle=3D"font-family:Consolas; font-style:italic; color:#a0a1a7"> =D0=B3=D1=
+=80=D1=83=D0=B7=D0=B8=D1=82 =D1=82=D0=BE=D0=BB=D1=8C=D0=BA=D0=BE format</sp=
+an><span style=3D"font-family:Consolas; color:#383a42"> </span></p><p style=
+=3D"margin-top:0pt; margin-bottom:12pt; padding-top:10pt; background-color:=
+#f1f1f1"><span style=3D"width:36pt; font-family:'Courier New'; display:inli=
+ne-block">&#xa0;</span><span style=3D"width:36pt; font-family:'Courier New'=
+; display:inline-block">&#xa0;</span><span style=3D"width:36pt; font-family=
+:'Courier New'; display:inline-block">&#xa0;</span></p><ul type=3D"disc" st=
+yle=3D"margin:0pt; padding-left:0pt"><li style=3D"margin-top:12pt; margin-l=
+eft:35.98pt; margin-bottom:6pt; padding-left:0.02pt; font-family:serif; fon=
+t-size:13pt"><span style=3D"font-family:'Times New Roman'">=D0=9F=D0=B5=D1=
+=80=D0=B2=D1=8B=D0=B9 =D0=B2=D0=B0=D1=80=D0=B8=D0=B0=D0=BD=D1=82 (</span><s=
+pan style=3D"font-family:Consolas">import { format } from 'date-fns'</span>=
+<span style=3D"font-family:'Times New Roman'">) =D0=BF=D0=BE=D0=B4=D1=82=D1=
+=8F=D0=BD=D0=B5=D1=82 =D0=B2=D0=B5=D1=81=D1=8C </span><span style=3D"font-f=
+amily:Consolas">index.js</span><span style=3D"font-family:'Times New Roman'=
+"> =D0=BF=D0=B0=D0=BA=D0=B5=D1=82=D0=B0 (=D0=BF=D0=BE =D1=81=D1=83=D1=82=D0=
+=B8 =D1=82=D0=BE =D0=B6=D0=B5 =D1=81=D0=B0=D0=BC=D0=BE=D0=B5, =D1=87=D1=82=
+=D0=BE </span><span style=3D"font-family:Consolas">require</span><span styl=
+e=3D"font-family:'Times New Roman'">).</span></li><li style=3D"margin-top:1=
+2pt; margin-left:35.98pt; margin-bottom:12pt; padding-left:0.02pt; font-fam=
+ily:serif; font-size:13pt"><span style=3D"font-family:'Times New Roman'">=
+=D0=92=D1=82=D0=BE=D1=80=D0=BE=D0=B9 =D0=B2=D0=B0=D1=80=D0=B8=D0=B0=D0=BD=
+=D1=82 (</span><span style=3D"font-family:Consolas">import format from 'dat=
+e-fns/format'</span><span style=3D"font-family:'Times New Roman'">) =D0=B4=
+=D0=B5=D0=B9=D1=81=D1=82=D0=B2=D0=B8=D1=82=D0=B5=D0=BB=D1=8C=D0=BD=D0=BE =
+=D0=B7=D0=B0=D0=B3=D1=80=D1=83=D0=B7=D0=B8=D1=82 =D1=82=D0=BE=D0=BB=D1=8C=
+=D0=BA=D0=BE =D0=BD=D1=83=D0=B6=D0=BD=D1=8B=D0=B9 =D0=BC=D0=BE=D0=B4=D1=83=
+=D0=BB=D1=8C.</span></li></ul><div align=3D"center"><hr size=3D"2" align=3D=
+"center" style=3D"width:100%" /></div><p style=3D"margin-top:14.05pt; margi=
+n-bottom:14.05pt; font-size:14pt"><span style=3D"font-weight:bold">3. =D0=
+=A7=D1=82=D0=BE =D0=B4=D0=B5=D0=BB=D0=B0=D0=B5=D1=82 tree-shaker (esbuild/R=
+ollup/Webpack)</span></p><p style=3D"margin-top:6pt; margin-bottom:6pt; fon=
+t-size:13pt"><span>=D0=95=D1=81=D0=BB=D0=B8 =D1=82=D1=8B =D1=81=D0=BE=D0=B1=
+=D0=B8=D1=80=D0=B0=D0=B5=D1=88=D1=8C =D0=BF=D1=80=D0=BE=D0=B5=D0=BA=D1=82 =
+=D1=81 ESM-=D0=B8=D0=BC=D0=BF=D0=BE=D1=80=D1=82=D0=B0=D0=BC=D0=B8:</span></=
+p><p style=3D"margin-top:10.5pt; margin-bottom:0pt; padding-top:10pt; backg=
+round-color:#f1f1f1"><span style=3D"font-family:'Courier New'">&#xa0;&#xa0;=
+&#xa0;&#xa0;&#xa0; </span><span style=3D"font-family:Consolas; color:#a626a=
+4">import</span><span style=3D"font-family:Consolas; color:#383a42"> { form=
+at } </span><span style=3D"font-family:Consolas; color:#a626a4">from</span>=
+<span style=3D"font-family:Consolas; color:#383a42"> </span><span style=3D"=
+font-family:Consolas; color:#50a14f">'date-fns'</span><span style=3D"font-f=
+amily:Consolas; color:#383a42">; </span></p><p style=3D"margin-top:0pt; mar=
+gin-bottom:12pt; padding-top:10pt; background-color:#f1f1f1"><span style=3D=
+"width:36pt; font-family:'Courier New'; display:inline-block">&#xa0;</span>=
+<span style=3D"width:36pt; font-family:'Courier New'; display:inline-block"=
+>&#xa0;</span><span style=3D"width:36pt; font-family:'Courier New'; display=
+:inline-block">&#xa0;</span></p><p style=3D"margin-top:6pt; margin-bottom:6=
+pt; font-size:13pt"><span>=D1=82=D0=BE =D1=81=D0=B1=D0=BE=D1=80=D1=89=D0=B8=
+=D0=BA:</span></p><ul type=3D"disc" style=3D"margin:0pt; padding-left:0pt">=
+<li style=3D"margin-top:12pt; margin-left:35.98pt; margin-bottom:6pt; paddi=
+ng-left:0.02pt; font-family:serif; font-size:13pt"><span style=3D"font-fami=
+ly:'Times New Roman'">=D0=BF=D1=80=D0=BE=D0=B0=D0=BD=D0=B0=D0=BB=D0=B8=D0=
+=B7=D0=B8=D1=80=D1=83=D0=B5=D1=82, =D1=87=D1=82=D0=BE =D1=82=D1=8B =D0=B8=
+=D1=81=D0=BF=D0=BE=D0=BB=D1=8C=D0=B7=D1=83=D0=B5=D1=88=D1=8C =D1=82=D0=BE=
+=D0=BB=D1=8C=D0=BA=D0=BE </span><span style=3D"font-family:Consolas">format=
+</span><span style=3D"font-family:'Times New Roman'">;</span></li><li style=
+=3D"margin-top:12pt; margin-left:35.98pt; margin-bottom:12pt; padding-left:=
+0.02pt; font-family:serif; font-size:13pt"><span style=3D"font-family:'Time=
+s New Roman'">=D0=B2=D1=8B=D1=80=D0=B5=D0=B6=D0=B5=D1=82 =D0=B2=D1=81=D1=91=
+ =D0=BE=D1=81=D1=82=D0=B0=D0=BB=D1=8C=D0=BD=D0=BE=D0=B5 (=D0=BF=D1=80=D0=B8=
+ =D1=83=D1=81=D0=BB=D0=BE=D0=B2=D0=B8=D0=B8, =D1=87=D1=82=D0=BE =D0=BF=D0=
+=B0=D0=BA=D0=B5=D1=82 </span><span style=3D"font-family:'Times New Roman'; =
+font-weight:bold">ESM-friendly</span><span style=3D"font-family:'Times New =
+Roman'"> =D0=B8 =D1=83 =D0=BD=D0=B5=D0=B3=D0=BE =D1=81=D1=82=D0=BE=D0=B8=D1=
+=82 </span><span style=3D"font-family:Consolas">"sideEffects": false</span>=
+<span style=3D"font-family:'Times New Roman'"> =D0=B2 </span><span style=3D=
+"font-family:Consolas">package.json</span><span style=3D"font-family:'Times=
+ New Roman'">).</span></li></ul><p style=3D"margin-top:6pt; margin-bottom:6=
+pt; font-size:13pt"><span style=3D"font-family:'Segoe UI Emoji'">=F0=9F=93=
+=8C</span><span> =D0=9D=D0=BE =D0=B4=D0=BB=D1=8F </span><span style=3D"font=
+-family:Consolas">date-fns</span><span> =D0=BE=D0=B1=D1=8B=D1=87=D0=BD=D0=
+=BE =D1=80=D0=B5=D0=BA=D0=BE=D0=BC=D0=B5=D0=BD=D0=B4=D1=83=D1=8E=D1=82 </sp=
+an><span style=3D"font-weight:bold">=D1=82=D0=BE=D1=87=D0=B5=D1=87=D0=BD=D1=
+=8B=D0=B5 =D0=B8=D0=BC=D0=BF=D0=BE=D1=80=D1=82=D1=8B</span><span> (</span><=
+span style=3D"font-family:Consolas">date-fns/format</span><span>), =D1=87=
+=D1=82=D0=BE=D0=B1=D1=8B =D0=B4=D0=B0=D0=B6=D0=B5 =D0=B1=D0=B5=D0=B7 tree-s=
+haking =D0=BD=D0=B5 =D1=82=D1=8F=D0=BD=D1=83=D1=82=D1=8C =D0=B2=D0=B5=D1=81=
+=D1=8C =D0=BF=D0=B0=D0=BA=D0=B5=D1=82.</span></p><div align=3D"center"><hr =
+size=3D"2" align=3D"center" style=3D"width:100%" /></div><p style=3D"margin=
+-top:14.05pt; margin-bottom:14.05pt; font-size:14pt"><span style=3D"font-we=
+ight:bold">4. =D0=98=D1=82=D0=BE=D0=B3</span></p><ul type=3D"disc" style=3D=
+"margin:0pt; padding-left:0pt"><li style=3D"margin-top:12pt; margin-left:35=
+.98pt; margin-bottom:6pt; padding-left:0.02pt; font-family:serif; font-size=
+:13pt"><span style=3D"font-family:'Times New Roman'; font-weight:bold">Node=
+.js + require =E2=86=92 =D0=B2=D1=81=D0=B5=D0=B3=D0=B4=D0=B0 =D0=B2=D0=B5=
+=D1=81=D1=8C =D0=BF=D0=B0=D0=BA=D0=B5=D1=82.</span></li><li style=3D"margin=
+-top:12pt; margin-left:35.98pt; margin-bottom:6pt; padding-left:0.02pt; fon=
+t-family:serif; font-size:13pt"><span style=3D"font-family:'Times New Roman=
+'; font-weight:bold">ESM + import =E2=86=92 =D1=82=D0=BE=D0=B6=D0=B5 =D0=B2=
+=D0=B5=D1=81=D1=8C =D0=BF=D0=B0=D0=BA=D0=B5=D1=82, =D0=B5=D1=81=D0=BB=D0=B8=
+ =D1=82=D1=8F=D0=BD=D1=83=D1=82=D1=8C =D0=B8=D0=B7 =D0=BA=D0=BE=D1=80=D0=BD=
+=D1=8F, =D0=BD=D0=BE =D0=BC=D0=BE=D0=B6=D0=BD=D0=BE =D0=B8=D0=BC=D0=BF=D0=
+=BE=D1=80=D1=82=D0=B8=D1=80=D0=BE=D0=B2=D0=B0=D1=82=D1=8C =D1=82=D0=BE=D0=
+=BB=D1=8C=D0=BA=D0=BE =D0=BD=D1=83=D0=B6=D0=BD=D1=8B=D0=B9 =D1=84=D0=B0=D0=
+=B9=D0=BB.</span></li><li style=3D"margin-top:12pt; margin-left:35.98pt; ma=
+rgin-bottom:48pt; padding-left:0.02pt; font-family:serif; font-size:13pt"><=
+span style=3D"font-family:'Times New Roman'; font-weight:bold">=D0=A1=D0=B1=
+=D0=BE=D1=80=D1=89=D0=B8=D0=BA (esbuild/rollup/webpack) =E2=86=92 tree-shak=
+ing =D1=81=D0=BF=D0=B0=D1=81=D0=B0=D0=B5=D1=82, =D0=BD=D0=BE =D1=82=D0=BE=
+=D1=87=D0=B5=D1=87=D0=BD=D1=8B=D0=B5 =D0=B8=D0=BC=D0=BF=D0=BE=D1=80=D1=82=
+=D1=8B =D0=B2=D1=81=D1=91 =D1=80=D0=B0=D0=B2=D0=BD=D0=BE =D0=BD=D0=B0=D0=B4=
+=D1=91=D0=B6=D0=BD=D0=B5=D0=B5.</span></li></ul></div></body></html>

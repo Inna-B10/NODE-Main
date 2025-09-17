@@ -1,5 +1,7 @@
 ## Switching from CommonJS (require) to ES Modules (import):
 
+**Reason to do it** read here: [Tree-shaking.md](Tree-shaking.md) - (google translate to Norwegian)
+
 1. **package.json:**  
    replace `"type": "commonjs",` with
 
