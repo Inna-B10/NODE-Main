@@ -1,0 +1,37 @@
+{
+	"name": "6-7_express-intro-middlewares",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"sideEffects": false,
+	"imports": {
+		"#utils/*": "./utils/*",
+		"#routes/*": "./routes/*",
+		"#view/*": "./view/*",
+		"#logs/*": "./logs/*",
+		"#middleware/*": "./middleware/*",
+		"#controllers/*": "./controllers/*",
+		"#constants/*": "./constants/*",
+		"#config/*": "./config/*"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server",
+		"dev": "nodemon server"
+	},
+	"dependencies": {
+		"bcrypt": "^6.0.0",
+		"cookie-parser": "^1.4.7",
+		"cors": "^2.8.5",
+		"date-fns": "^4.1.0",
+		"dotenv": "^17.2.2",
+		"express": "^5.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"uuid": "^13.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.10"
+	}
+}
