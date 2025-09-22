@@ -1,13 +1,17 @@
 import { corsOptions } from '#config/corsOptions.js'
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
+import { verifyJWT } from '#middleware/verifyJWT.js'
 import { aboutRouter } from '#routes/about.js' // Import the router
 import { employeesRouter } from '#routes/api/employees.js'
 import { authRouter } from '#routes/auth.js'
+import { logoutRouter } from '#routes/logout.js'
+import { refreshRouter } from '#routes/refresh.js'
 import { registerRouter } from '#routes/register.js'
 import { rootRouter } from '#routes/root.js'
 import { subdirRouter } from '#routes/subdir/subdir.js' // Import the router
 import { rootDir } from '#utils/path.js'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
@@ -25,13 +29,19 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(express.static(path.join(rootDir, '/public')))
 
+//cookie
+app.use(cookieParser())
+
 //* ----------------------------- Attach Routers ----------------------------- */
 app.use('/', rootRouter)
 app.use('/subdir{/}', subdirRouter)
 app.use('/about{/}', aboutRouter)
 app.use('/register{/}', registerRouter)
 app.use('/auth{/}', authRouter)
+app.use('/refresh{/}', refreshRouter)
+app.use('/logout{/}', logoutRouter)
 
+app.use(verifyJWT)
 // API router
 app.use('/api/employees', employeesRouter)
 
