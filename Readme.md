@@ -95,7 +95,7 @@ REFRESH_TOKEN_SECRET =
    - Run the same command again to generate a new string.
    - Copy that output and paste it as the value of `REFRESH_TOKEN_SECRET` in your **.env** file
 3. 🚩 **add .env to .gitignore file!**
-4. Create **middleware/verifyJWT.js**
+4. Create **middleware/verifyJWT.js** (see file)
 5. Update **authController.js**:
 
 ```js
@@ -181,3 +181,167 @@ export const handleLogin = async (req, res) => {
 ```
 
 7. Check **users.json** file: `"refreshToken":"..."` should be added to your user.
+
+8. Test with **Thunder client**:
+
+   - GET http://localhost:3500/api/employees
+   - BODY: `{ "user": "Test1", "pwd": "123456" }`  
+     You **will** see the list of employees
+
+9. protect route employees with JWT auth:  
+   **server.js**
+
+   - `import { verifyJWT } from '#middleware/verifyJWT.js'`
+   - before `app.use('/api/employees', employeesRouter)` add `app.use(verifyJWT)`
+
+10. Test with **Thunder client** now:
+
+    - GET http://localhost:3500/api/employees
+    - BODY: `{ "user": "Test1", "pwd": "123456" }`  
+      You **will not** allowed to see the list of employees.
+
+11. Next test in **Thunder client** should be done very quickly because accessToken lives only 30sec:
+
+    - log in with `{ "user": "Test1", "pwd": "123456" }`
+      in Response you will get `{"accessToken": "some_string"}`
+
+      - copy **some_string** to
+        http://localhost:3500/api/employees -> tab Auth -> Bearer -> Bearer Token
+
+      - send request
+        You should see the list of employees. (if not, try log in+copy+request again)
+
+      - Wait for 30 sec and send request with the same token. You will be forbidden to see employees because the jwt token is expired.
+
+### refresh and logout:
+
+1. **server.js**:
+
+   - `import cookieParser from 'cookie-parser'`
+   - after `app.use(cors(corsOptions))` add `app.use(cookieParser())`
+
+2. create **refreshController.js**:
+
+```js
+// import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config()
+
+import { rootDir } from '#utils/path.js'
+import fs from 'fs'
+import jwt from 'jsonwebtoken'
+import path from 'path'
+
+const usersDataPath = path.join(rootDir, 'model', 'users.json')
+
+export const usersDB = {
+	users: JSON.parse(fs.readFileSync(usersDataPath, 'utf-8')),
+	setUsers(data) {
+		this.users = data
+	},
+}
+
+export const handleRefreshToken = (req, res) => {
+	// Extract cookies from the request body
+	const cookies = req.cookies
+
+	// If cookies are not found, return 401 Unauthorized
+	if (!cookies?.jwt) return res.sendStatus(401)
+
+	const refreshToken = cookies.jwt
+	console.log('refreshToken:', refreshToken)
+
+	// Look for the user in the "usersDB" database
+	const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken)
+
+	// If user is not found, return 401 Unauthorized
+	if (!foundUser) return res.sendStatus(403)
+
+	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+		if (err || foundUser.username !== decoded.username) return res.sendStatus(403)
+		//prettier-ignore
+		const accessToken = jwt.sign
+        (
+          { username: decoded.username },
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: '30s' }
+        )
+		res.json({ accessToken })
+	})
+}
+```
+
+3. create **routes/refresh.js**:
+
+```js
+import * as refreshController from '#controllers/refreshController.js'
+import { Router } from 'express'
+
+export const refreshRouter = Router()
+
+refreshRouter.get('/', refreshController.handleRefreshToken)
+```
+
+4. **server.js**: add `app.use('/refresh{/}', refreshRouter)` + import **refreshRouter**
+5. create **logoutController.js**
+
+```js
+// import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config()
+
+import { rootDir } from '#utils/path.js'
+import fs from 'fs'
+import * as fsPromises from 'fs/promises'
+import path from 'path'
+
+const usersDataPath = path.join(rootDir, 'model', 'users.json')
+
+export const usersDB = {
+	users: JSON.parse(fs.readFileSync(usersDataPath, 'utf-8')),
+	setUsers(data) {
+		this.users = data
+	},
+}
+
+export const handleLogout = async (req, res) => {
+	// Extract cookies from the request body
+	const cookies = req.cookies
+
+	// If cookies are not found, return 401 Unauthorized
+	if (!cookies?.jwt) return res.sendStatus(401)
+
+	const refreshToken = cookies.jwt
+
+	// Look for the user in the "usersDB" database
+	const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken)
+
+	// If user is not found -
+	if (!foundUser) {
+		res.clearCookie('jwt', { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+		return res.sendStatus(204)
+	}
+
+	const otherUsers = usersDB.users.filter(person => person.refreshToken !== refreshToken)
+	const currentUser = { ...foundUser, refreshToken: '' }
+	usersDB.setUsers([...otherUsers, currentUser])
+
+	await fsPromises.writeFile(path.json(rootDir, 'model', 'users.json'), JSON.stringify(usersDB.users))
+
+	res.clearCookie('jwt', { httpOnly: true, maxAge: 24 * 60 * 60 * 100 })
+	res.sendStatus(204)
+}
+```
+
+6. create **routes/logout.js**:
+
+```js
+import * as logoutController from '#controllers/logoutController.js'
+import { Router } from 'express'
+
+export const logoutRouter = Router()
+
+logoutRouter.get('/', logoutController.handleLogout)
+```
+
+7. **server.js**: add `app.use('/logout{/}', logoutRouter)` + import **logoutRouter**
