@@ -43,16 +43,22 @@ export const handleRefreshToken = (req, res) => {
 		// If verification fails OR username mismatch → Forbidden
 		if (err || foundUser.username !== decoded.username) return res.sendStatus(403)
 
+		// 7. Extract user roles for embedding in the new access token
+		const roles = Object.values(foundUser.roles)
+
 		// 8. Create a new short-lived access token
-		//    - Includes username
+		//    - Includes username and roles inside "UserInfo"
 		//    - Signed with ACCESS_TOKEN_SECRET
 		//    - Expiration set to 30 seconds
-
-		//prettier-ignore
-		const accessToken = jwt.sign
-		(
-			{ username: decoded.username },
-			process.env.ACCESS_TOKEN_SECRET, 
+		// prettier-ignore
+		const accessToken = jwt.sign(
+			{
+				"UserInfo": {
+					"username": decoded.username,
+					"roles": roles,
+				}
+			},
+			process.env.ACCESS_TOKEN_SECRET,
 			{ expiresIn: '30s' }
 		)
 

@@ -23,7 +23,7 @@ npm install cookie-parser
 
  <br />
 
-## step1 - Create a new user:
+## **step1 - Create a new user**:
 
 1. Create **model/users.json**: `[]`
 2. Create **controllers/registerController.js** (see file)
@@ -34,7 +34,7 @@ npm install cookie-parser
 - POST http://localhost:3500/register
 - Body: `{ "user": "Test1", "pwd": "123456" }` remember the password!
 
-## step2 - Log in:
+## **step2 - Log in**:
 
 1. create **controllers/authController.js**:
 
@@ -77,7 +77,7 @@ export const handleLogin = async (req, res) => {
 
 5. Check **users.json** file: new user should be added.
 
-## step3 - JWT auth
+## **step3 - JWT auth**:
 
 ### 👉 about **[JWT\_(JSON_Web_Token).md](<JWT_(JSON_Web_Token).md>)**
 
@@ -188,7 +188,7 @@ export const handleLogin = async (req, res) => {
    - BODY: `{ "user": "Test1", "pwd": "123456" }`  
      You **will** see the list of employees
 
-9. protect route employees with JWT auth:  
+9. Protect route employees with JWT auth:  
    **server.js**
 
    - `import { verifyJWT } from '#middleware/verifyJWT.js'`
@@ -205,22 +205,22 @@ export const handleLogin = async (req, res) => {
     - log in with `{ "user": "Test1", "pwd": "123456" }`
       in Response you will get `{"accessToken": "some_string"}`
 
-      - copy **some_string** to
-        http://localhost:3500/api/employees -> tab Auth -> Bearer -> Bearer Token
+      - copy **some_string** to  
+        GET http://localhost:3500/api/employees -> tab Auth -> Bearer -> Bearer Token
 
-      - send request
+      - send request  
         You should see the list of employees. (if not, try log in+copy+request again)
 
       - Wait for 30 sec and send request with the same token. You will be forbidden to see employees because the jwt token is expired.
 
 ### refresh and logout:
 
-1. **server.js**:
+1. Update **server.js**:
 
    - `import cookieParser from 'cookie-parser'`
    - after `app.use(cors(corsOptions))` add `app.use(cookieParser())`
 
-2. create **refreshController.js**:
+2. Create **refreshController.js**:
 
 ```js
 // import 'dotenv/config'
@@ -271,7 +271,7 @@ export const handleRefreshToken = (req, res) => {
 }
 ```
 
-3. create **routes/refresh.js**:
+3. Create **routes/refresh.js**:
 
 ```js
 import * as refreshController from '#controllers/refreshController.js'
@@ -282,8 +282,8 @@ export const refreshRouter = Router()
 refreshRouter.get('/', refreshController.handleRefreshToken)
 ```
 
-4. **server.js**: add `app.use('/refresh{/}', refreshRouter)` + import **refreshRouter**
-5. create **logoutController.js**
+4. Update **server.js**: add `app.use('/refresh{/}', refreshRouter)` + import **refreshRouter**
+5. Create **logoutController.js**
 
 ```js
 // import 'dotenv/config'
@@ -333,7 +333,7 @@ export const handleLogout = async (req, res) => {
 }
 ```
 
-6. create **routes/logout.js**:
+6. Create **routes/logout.js**:
 
 ```js
 import * as logoutController from '#controllers/logoutController.js'
@@ -344,4 +344,241 @@ export const logoutRouter = Router()
 logoutRouter.get('/', logoutController.handleLogout)
 ```
 
-7. **server.js**: add `app.use('/logout{/}', logoutRouter)` + import **logoutRouter**
+7. Update **server.js**:  
+   add `app.use('/logout{/}', logoutRouter)` + import **logoutRouter**
+
+<br />
+
+## **step4 - Roles**:
+
+1. Create **constants/roles-list.js**
+
+```js
+export const ROLES_LIST = {
+	Admin: 1001,
+	Editor: 1002,
+	User: 1003,
+}
+```
+
+2. Update **users.json**
+
+```json
+[
+	{
+		"username": "Test1",
+		"roles": {
+			"User": 1003
+		},
+		"password": "$2b$10$gEvOM9o3RK2J7XI/WV8TUeK/87uOOyiLHRjjSwOrDNVfbxbGX1N16",
+		"refreshToken": ""
+	},
+	{
+		"username": "Test2",
+		"roles": {
+			"User": 1003,
+			"Admin": 1001
+		},
+		"password": "$2b$10$gEvOM9o3RK2J7XI/WV8TUeK/87uOOyiLHRjjSwOrDNVfbxbGX1N16"
+	},
+	{
+		"username": "Test3",
+		"roles": {
+			"User": 1003,
+			"Editor": 1002
+		},
+		"password": "$2b$10$gEvOM9o3RK2J7XI/WV8TUeK/87uOOyiLHRjjSwOrDNVfbxbGX1N16"
+	}
+]
+```
+
+3. Update **registerController.js**:  
+   replace `const newUser = { username: user, password: hashedPwd }` with
+
+```js
+const newUser = {
+	username: user,
+	roles: { User: 1003 },
+	password: hashedPwd,
+}
+```
+
+4. Update **authController.js**: replace
+
+```js
+const accessToken = jwt.sign(
+	{ username: foundUser.username },
+	process.env.ACCESS_TOKEN_SECRET,
+	{ expiresIn: '30s' } // access token expires in 30 seconds
+)
+```
+
+with
+
+```js
+const roles = Object.values(foundUser.roles)
+const accessToken = jwt.sign(
+	{
+		UserInfo: {
+			username: foundUser.username,
+			roles: roles,
+		},
+	},
+	process.env.ACCESS_TOKEN_SECRET,
+	{ expiresIn: '30s' } // access token expires in 30 seconds
+)
+```
+
+5. Update **refreshController.js**: replace
+
+```js
+const accessToken = jwt.sign({ username: decoded.username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' })
+```
+
+with
+
+```js
+// 7. Extract user roles for embedding in the new access token
+const roles = Object.values(foundUser.roles)
+
+// 8. Create a new short-lived access token
+//    - Includes username and roles inside "UserInfo"
+//    - Signed with ACCESS_TOKEN_SECRET
+//    - Expiration set to 30 seconds
+// prettier-ignore
+const accessToken = jwt.sign(
+			{
+				"UserInfo": {
+					"username": decoded.username,
+					"roles": roles,
+				}
+			},
+			process.env.ACCESS_TOKEN_SECRET,
+			{ expiresIn: '30s' }
+		)
+```
+
+6. Update **verifyJWT.js**
+
+```js
+import jwt from 'jsonwebtoken'
+
+import dotenv from 'dotenv'
+dotenv.config()
+
+export const verifyJWT = (req, res, next) => {
+	// Extract the "Authorization" header from the request
+	const authHeader = req.headers.authorization || req.headers.Authorization
+
+	// Log the raw Authorization header (e.g. "Bearer eyJhbGciOiJIUzI1NiIs...")
+	console.log('authHeader:', authHeader)
+
+	// If no Bearer Authorization header is present, the client is not authenticated → 401 Unauthorized
+	if (!authHeader?.startsWith('Bearer ')) return res.sendStatus(401)
+
+	// Split the header: "Bearer <token>" → take only the token part
+	const token = authHeader.split(' ')[1]
+
+	// Verify the token with the secret key
+	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+		// If verification fails (expired, invalid, or tampered token) → 403 Forbidden
+		if (err) {
+			console.log(err.message)
+			return res.sendStatus(403)
+		}
+
+		// If valid, attach the decoded username and roles to the request object
+		// so other middleware/routes can know which user is making the request and if this user authorized to do it
+		req.user = decoded.UserInfo.username
+		req.roles = decoded.UserInfo.roles
+
+		// Call the next middleware or route handler
+		next()
+	})
+}
+```
+
+7. Create **middleware/verifyRoles.js**
+
+```js
+// Middleware to verify if the user has one of the allowed roles
+export const verifyRoles = (...allowedRoles) => {
+	// "allowedRoles" is a rest parameter → it collects all arguments into an array
+	// Example: verifyRoles('Admin', 'Editor')
+
+	return (req, res, next) => {
+		// 1. If the request object has no roles attached, reject with Unauthorized
+		if (!req?.roles) return res.sendStatus(401)
+
+		// 2. Copy allowedRoles into a new array (for clarity/logging)
+		const rolesArray = [...allowedRoles]
+		console.log('Allowed roles:', rolesArray)
+		console.log('User roles:', req.roles)
+
+		// 3. Compare user roles against allowed roles
+		//    - For each role in req.roles, check if it’s in allowedRoles
+		//    - "map" returns [true/false/...]
+		//    - "find" returns the first true, or undefined if none
+		const result = req.roles.map(role => rolesArray.includes(role)).find(val => val === true)
+
+		// 4. If no matching role found → Unauthorized
+		if (!result) return res.sendStatus(401)
+
+		// 5. Otherwise, user has permission → move to the next middleware/route
+		next()
+	}
+}
+```
+
+8. Update **routes/api/employees.js**:
+
+```js
+import { ROLES_LIST } from '#constants/roles-list.js'
+import * as empService from '#controllers/employeesController.js'
+import { verifyRoles } from '#middleware/verifyRoles.js'
+import { Router } from 'express'
+
+export const employeesRouter = Router()
+
+//# ------------------------------- All employees
+employeesRouter
+	.route('/')
+	.get(empService.getAllEmployees)
+	.post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), empService.createNewEmployee)
+	.delete(verifyRoles(ROLES_LIST.Admin), empService.deleteAllEmployees)
+
+//# ------------------------------- Single employee
+employeesRouter
+	.route('/:id')
+	.get(empService.getSingleEmployee)
+	.put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), empService.updateEmployee)
+	.delete(verifyRoles(ROLES_LIST.Admin), empService.deleteSingleEmployee)
+```
+
+<br />
+<br />
+
+---
+
+### **For using in Thunder client**:
+
+```
++-----------------------------------------------------------------------------------------------+
+| action             | method, path, needed data                 | response success/unsuccess   |
++-----------------------------------------------------------------------------------------------+
+| logout 		     | GET http://localhost:3500/logout          | 204 204 No Content           |
+|                    |                                           | 401 Unauthorized             |
++-----------------------------------------------------------------------------------------------+
+| log in/auth        | POST http://localhost:3500/auth           | 200 OK                       |
+|                    | BODY { "user": "Test1", "pwd": "123456"}  | 401 Unauthorized             |
++-----------------------------------------------------------------------------------------------+
+| get employees      | GET http://localhost:3500/api/employees   | 200 OK                       |
+| (protected API)    | Auth/Bearer `accessToken                  | 403 Forbidden                |
++-----------------------------------------------------------------------------------------------+
+| register           | POST http://localhost:3500/register       | 201 Created                  |
+|                    | BODY { "user": "Test1", "pwd": "123456" } | 400 Bad Request/409 Conflict |
++-----------------------------------------------------------------------------------------------+
+| refresh token      | GET http://localhost:3500/refresh         | 200 OK                       |
+|                    |                                           | 401 Unauthorized             |
++-----------------------------------------------------------------------------------------------+
+```
