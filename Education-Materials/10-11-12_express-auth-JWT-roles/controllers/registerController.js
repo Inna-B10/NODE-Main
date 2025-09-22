@@ -28,7 +28,11 @@ export const handleNewUser = async (req, res) => {
 		const hashedPwd = await bcrypt.hash(pwd, 10)
 
 		// Build new user object
-		const newUser = { username: user, password: hashedPwd }
+		const newUser = {
+			username: user,
+			roles: { User: 1003 },
+			password: hashedPwd,
+		}
 
 		// Update in-memory users list
 		usersDB.setUsers([...usersDB.users, newUser])
