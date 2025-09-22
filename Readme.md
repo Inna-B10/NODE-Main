@@ -1,5 +1,8 @@
 # Express: User password auth and JWT auth
 
+<details>
+<summary>used libraries:</summary>
+
 ```js
 npm init -y
 npm install date-fns, express, uuid
@@ -12,9 +15,9 @@ npm install jsonwebtoken
 npm install cookie-parser
 ```
 
-### **👉 [Compact_HTTP_status_code_cheatsheet_for_APIs.md](Compact_HTTP_status_code_cheatsheet_for_APIs.md)**
+</details>
 
----
+### **👉 [Compact_HTTP_status_code_cheatsheet_for_APIs.md](Compact_HTTP_status_code_cheatsheet_for_APIs.md)**
 
 ### 💡 Rule of thumb:
 
@@ -22,8 +25,10 @@ npm install cookie-parser
 - Use `res.sendStatus(...)` if you only care about the status (no details).
 
  <br />
+<details>
 
-## **step1 - Create a new user**:
+<summary><h3 style="display:inline"><strong>Step 1 - Create a new user</strong></h3></summary>
+<br />
 
 1. Create **model/users.json**: `[]`
 2. Create **controllers/registerController.js** (see file)
@@ -31,10 +36,14 @@ npm install cookie-parser
 4. Update **server.js**: import _**register route**_
 5. Test with **Thunder client**: try to add new user
 
-- POST http://localhost:3500/register
-- Body: `{ "user": "Test1", "pwd": "123456" }` remember the password!
+   - POST http://localhost:3500/register
+   - Body: `{ "user": "Test1", "pwd": "123456" }` remember the password!
+   </details>
+   <br />
 
-## **step2 - Log in**:
+<details>
+<summary><h3 style="display:inline"><strong>Step 2 - Log in</strong></h3></summary>
+<br />
 
 1. create **controllers/authController.js**:
 
@@ -76,8 +85,10 @@ export const handleLogin = async (req, res) => {
    - Body `{ "user": "Test1", "pwd": "123456" }`
 
 5. Check **users.json** file: new user should be added.
-
-## **step3 - JWT auth**:
+</details>
+<br />
+<details>
+<summary><h3 style="display:inline"><strong>Step 3 - JWT auth</strong></h3></summary>
 
 ### 👉 about **[JWT\_(JSON_Web_Token).md](<JWT_(JSON_Web_Token).md>)**
 
@@ -180,19 +191,19 @@ export const handleLogin = async (req, res) => {
 }
 ```
 
-7. Check **users.json** file: `"refreshToken":"..."` should be added to your user.
+7.  Check **users.json** file: `"refreshToken":"..."` should be added to your user.
 
-8. Test with **Thunder client**:
+8.  Test with **Thunder client**:
 
-   - GET http://localhost:3500/api/employees
-   - BODY: `{ "user": "Test1", "pwd": "123456" }`  
-     You **will** see the list of employees
+    - GET http://localhost:3500/api/employees
+    - BODY: `{ "user": "Test1", "pwd": "123456" }`  
+      You **will** see the list of employees
 
-9. Protect route employees with JWT auth:  
-   **server.js**
+9.  Protect route employees with JWT auth:  
+    **server.js**
 
-   - `import { verifyJWT } from '#middleware/verifyJWT.js'`
-   - before `app.use('/api/employees', employeesRouter)` add `app.use(verifyJWT)`
+    - `import { verifyJWT } from '#middleware/verifyJWT.js'`
+    - before `app.use('/api/employees', employeesRouter)` add `app.use(verifyJWT)`
 
 10. Test with **Thunder client** now:
 
@@ -202,18 +213,24 @@ export const handleLogin = async (req, res) => {
 
 11. Next test in **Thunder client** should be done very quickly because accessToken lives only 30sec:
 
-    - log in with `{ "user": "Test1", "pwd": "123456" }`
-      in Response you will get `{"accessToken": "some_string"}`
+        - log in with `{ "user": "Test1", "pwd": "123456" }`
+          in Response you will get `{"accessToken": "some_string"}`
 
-      - copy **some_string** to  
-        GET http://localhost:3500/api/employees -> tab Auth -> Bearer -> Bearer Token
+          - copy **some_string** to
+            GET http://localhost:3500/api/employees -> tab Auth -> Bearer -> Bearer Token
 
-      - send request  
-        You should see the list of employees. (if not, try log in+copy+request again)
+          - send request
+            You should see the list of employees. (if not, try log in+copy+request again)
 
-      - Wait for 30 sec and send request with the same token. You will be forbidden to see employees because the jwt token is expired.
+          - Wait for 30 sec and send request with the same token. You will be forbidden to see employees because the jwt token is expired.
 
-### refresh and logout:
+    </details>
+    <br />
+    <br />
+
+<details>
+<summary><h3 style="display:inline"><strong>Step 3.1 - Refresh and LogOut</strong></h3></summary>
+<br />
 
 1. Update **server.js**:
 
@@ -349,7 +366,31 @@ logoutRouter.get('/', logoutController.handleLogout)
 
 <br />
 
-## **step4 - Roles**:
+---
+
+</details>
+
+<br />
+
+**REFRESH TOKEN FLOW** (high-level overview):
+
+- **Access tokens** are short-lived (e.g. 30s here).
+- **Refresh tokens** are long-lived (stored in httpOnly cookies).
+- When the access token expires, the client asks for a new one
+  by calling this refresh route with the refresh token cookie.
+- If the refresh token is valid and matches a user in DB:
+  → Issue a brand-new short-lived access token.
+- If not valid, user must log in again.
+
+This keeps access tokens small, disposable, and safe to use on the client side,
+while refresh tokens (safer in httpOnly cookies) maintain longer sessions.
+
+<br />
+<br />
+
+<details>
+<summary><h3 style="display:inline"><strong>Step4 - Roles</strong></h3></summary>
+<br />
 
 1. Create **constants/roles-list.js**
 
@@ -556,9 +597,11 @@ employeesRouter
 ```
 
 <br />
-<br />
 
 ---
+
+</details>
+<br />
 
 ### **For using in Thunder client**:
 
