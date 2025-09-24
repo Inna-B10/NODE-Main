@@ -17,3 +17,79 @@ npm install better-sqlite3
 <br />
 
 👉 Download and install: **[DB Browser for SQLite](https://sqlitebrowser.org/dl/)**
+
+## Step 1 - Creating DB
+
+1. Create **database/database.js**:
+
+```js
+import { rootDir } from '#utils/path.js'
+import Database from 'better-sqlite3'
+import path from 'path'
+
+const dbPath = path.join(rootDir, 'database', 'companyEmployees.sqlite')
+
+// Connect to the database (will create the companyEmployees.sqlite file if it doesn't exist)
+export const db = new Database(dbPath, { verbose: console.log })
+
+// Create a table if there isn't one
+db.prepare(
+	`CREATE TABLE IF NOT EXISTS employees
+  (
+    id  INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    job_title TEXT NOT NULL
+  )`
+).run()
+
+console.log('✅ The DB and table "employees" have been created!')
+```
+
+2. In the terminal run: `node database/database.js`.  
+   It will create **database/companyEmployees.sqlite**
+
+3. Open **DB Browser** program:
+
+- tab **Open Database** -> select the newly created **companyEmployees.sqlite** from project.
+
+<details>
+<summary><h3  style="display:inline"><strong> 🔹 Step 1 - Alternative </strong></h3></summary>
+
+1. Create **database/database.js**:
+
+```js
+import { rootDir } from '#utils/path.js'
+import Database from 'better-sqlite3'
+import path from 'path'
+
+const dbPath = path.join(rootDir, 'database', 'companyEmployees.sqlite')
+
+export function initDB() {
+	const db = new Database(dbPath, { verbose: console.log })
+	db.prepare(
+		`
+    CREATE TABLE IF NOT EXISTS employees (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+			first_name TEXT NOT NULL,
+			last_name TEXT NOT NULL,
+			job_title TEXT NOT NULL
+    )`
+	).run()
+
+	console.log('✅ The DB and table "employees" have been created!')
+	return db
+}
+```
+
+2. Update **server.js**
+
+```js
+import { initDB } from './database/database.js'
+
+const db = initDB() //explicit function call
+```
+
+3. Start server.  
+It will create **database/companyEmployees.sqlite** - DB and table structure.
+</details>
