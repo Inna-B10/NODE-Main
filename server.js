@@ -25,7 +25,7 @@ app.use(express.static(path.join(rootDir, '/public')))
 app.use('/', rootRouter)
 
 // API router
-app.use('/api/employees{/}', employeesRouter)
+app.use('/api/employees', employeesRouter)
 
 //* ------------------------ 404 And ErrorHandler Middlewares ----------------------- */
 
