@@ -2,15 +2,21 @@ import { corsOptions } from '#config/corsOptions.js'
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
 import { employeesRouter } from '#routes/api/employees.js'
+import { chatRouter } from '#routes/chat.js'
 import { rootRouter } from '#routes/root.js'
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
+import http from 'http'
 import path from 'path'
+import { Server } from 'socket.io'
 import { db } from './database/database.js'
 
 const PORT = process.env.PORT || 3500
 const app = express()
+
+const server = http.createServer(app)
+const io = new Server(server)
 
 //* ------------------------------- Middleware ------------------------------- */
 app.use(logger)
@@ -24,6 +30,7 @@ app.use(express.static(path.join(rootDir, '/public')))
 
 //* ----------------------------- Attach Routers ----------------------------- */
 app.use('/', rootRouter)
+app.use('/chat', chatRouter)
 
 // API router
 app.use('/api/employees', employeesRouter)
@@ -43,7 +50,19 @@ app.use('/api', (req, res) => {
 // error handler
 app.use(errorHandler)
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+//webSocket
+io.on('connection', socket => {
+	console.log('WebSocket connected: ', socket.id)
+	socket.on('chatMessage', msg => {
+		io.emit('chatMessage', msg)
+	})
+
+	socket.on('disconnect', () => {
+		console.log('WebSocket disconnected')
+	})
+})
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 //close connection
 process.on(`SIGINT`, () => {
