@@ -53,6 +53,7 @@ console.log('✅ The DB and table "employees" have been created!')
 
 - tab **Open Database** -> select the newly created **companyEmployees.sqlite** from project.
 
+<br />
 <details>
 <summary><h3  style="display:inline"><strong> 🔹 Step 1 - Alternative </strong></h3></summary>
 
@@ -93,6 +94,8 @@ const db = initDB() //explicit function call
 3. Start server.  
 It will create **database/companyEmployees.sqlite** - DB and table structure.
 </details>
+
+<br />
 
 ## Step 2 - Migrations and seeding
 
@@ -319,3 +322,24 @@ export const handleDeleteEmployee = (req, res) => {
 4. Test with **Thunder client**:
 
 - DELETE `http://localhost:3500/api/employees/51`
+
+## Step 4 - Close connection
+
+Update **server.js**: add import  
+`import { db } from './database/database.js'`
+
+add at the end
+
+```js
+//close connection
+process.on(`SIGINT`, () => {
+	try {
+		db.close()
+		console.log('Database connection closed')
+	} catch (err) {
+		console.error('Failed to close database connection', err.message)
+	} finally {
+		process.exit(0)
+	}
+})
+```

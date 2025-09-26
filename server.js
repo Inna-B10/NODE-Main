@@ -7,6 +7,7 @@ import { rootDir } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
+import { db } from './database/database.js'
 
 const PORT = process.env.PORT || 3500
 const app = express()
@@ -43,3 +44,15 @@ app.use('/api', (req, res) => {
 app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+//close connection
+process.on(`SIGINT`, () => {
+	try {
+		db.close()
+		console.log('Database connection closed')
+	} catch (err) {
+		console.error('Failed to close database connection', err.message)
+	} finally {
+		process.exit(0)
+	}
+})
