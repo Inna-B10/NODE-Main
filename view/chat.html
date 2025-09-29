@@ -4,17 +4,18 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Live Chat</title>
-		<link rel="stylesheet" href="/css/chat.css" />
+		<script src="/socket.io/socket.io.js"></script>
+		<link rel="stylesheet" href="./css/chat.css" />
 	</head>
 	<body>
 		<h1>Live Chat</h1>
 
 		<input type="text" id="msgInput" placeholder="Write a message..." />
-		<button id="sendButton">Send</button>
+		<button id="sendButton" onclick="sendMessage()">Send</button>
+		<button onclick="sendNotification()">Send Notification</button>
 
-		<ul id="message"></ul>
+		<ul id="messages"></ul>
 
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="/JS/chat.js"></script>
+		<script src="./JS/chat.js"></script>
 	</body>
 </html>

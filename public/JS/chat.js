@@ -23,13 +23,13 @@ socket.on('chatMessage', msg => {
 	} else {
 		item.textContent = msg
 	}
-	document.getElementById('message').appendChild(item)
+	document.getElementById('messages').appendChild(item)
 })
 
 socket.on('notification', msg => {
 	const item = document.createElement('li')
 	item.textContent = 'Notification: ' + msg
-	document.getElementById('message').appendChild(item)
+	document.getElementById('messages').appendChild(item)
 })
 
 socket.on('connect', () => {

@@ -21,7 +21,12 @@ npm install better-sqlite3 //?
 
 ### **👉 [app.listen(...) VS server.listen(...)](app_listen_VS_server_listen.md)**
 
-### **👉 [minimal primitive chat example.md](minimal_primitive_chat.md)**
+### **👉 [server-client-flow](server-client-flow.md)**
+
+### **👉 [minimal primitive chat example (GPT-chat)](minimal_primitive_chat.md)**
+
+<details>
+<summary><h2 style="display:inline"><strong>Part 1</strong></h2></summary>
 
 ### 1. Update **server.js**
 
@@ -65,7 +70,8 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Live Chat</title>
-		<link rel="stylesheet" href="/css/chat.css" />
+		<script src="/socket.io/socket.io.js"></script>
+		<link rel="stylesheet" href="./css/chat.css" />
 	</head>
 	<body>
 		<h1>Live Chat</h1>
@@ -73,10 +79,9 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 		<input type="text" id="msgInput" placeholder="Write a message..." />
 		<button id="sendButton">Send</button>
 
-		<ul id="message"></ul>
+		<ul id="messages"></ul>
 
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="/JS/chat.js"></script>
+		<script src="./JS/chat.js"></script>
 	</body>
 </html>
 ```
@@ -139,13 +144,13 @@ socket.on('chatMessage', msg => {
 	} else {
 		item.textContent = msg
 	}
-	document.getElementById('message').appendChild(item)
+	document.getElementById('messages').appendChild(item)
 })
 
 socket.on('notification', msg => {
 	const item = document.createElement('li')
 	item.textContent = 'Notification: ' + msg
-	document.getElementById('message').appendChild(item)
+	document.getElementById('messages').appendChild(item)
 })
 
 socket.on('connect', () => {
@@ -185,3 +190,5 @@ chatRouter.get('/', (req, res) => {
 	res.sendFile(path.join(rootDir, 'view', 'chat.html'))
 })
 ```
+
+</details>
