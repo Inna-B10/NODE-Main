@@ -1,0 +1,36 @@
+{
+	"name": "14_express-web-sockets",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"sideEffects": false,
+	"imports": {
+		"#utils/*": "./utils/*",
+		"#routes/*": "./routes/*",
+		"#view/*": "./view/*",
+		"#logs/*": "./logs/*",
+		"#middleware/*": "./middleware/*",
+		"#controllers/*": "./controllers/*",
+		"#constants/*": "./constants/*",
+		"#config/*": "./config/*"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server",
+		"dev": "nodemon server"
+	},
+	"dependencies": {
+		"better-sqlite3": "^12.4.1",
+		"cors": "^2.8.5",
+		"date-fns": "^4.1.0",
+		"express": "^5.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"socket.io": "^4.8.1",
+		"uuid": "^13.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.10"
+	}
+}
