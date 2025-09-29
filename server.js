@@ -3,6 +3,7 @@ import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
 import { employeesRouter } from '#routes/api/employees.js'
 import { chatRouter } from '#routes/chat.js'
+import { projectsRouter } from '#routes/projects.js'
 import { rootRouter } from '#routes/root.js'
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
@@ -31,6 +32,7 @@ app.use(express.static(path.join(rootDir, '/public')))
 //* ----------------------------- Attach Routers ----------------------------- */
 app.use('/', rootRouter)
 app.use('/chat', chatRouter)
+app.use('/projects', projectsRouter)
 
 // API router
 app.use('/api/employees', employeesRouter)
@@ -50,11 +52,34 @@ app.use('/api', (req, res) => {
 // error handler
 app.use(errorHandler)
 
-//webSocket
+//* -------------------------------- WebSocket ------------------------------- */
+
+// io.use((socket, next) => {
+// 	const token = socket.handshake.auth.token
+//
+// 	if (!token) {
+// 		return next(new Error('Authentication failed: No token provided'))
+// 	}
+// 	try {
+// 		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+// 		socket.user = decoded
+// 		next()
+// 	} catch (err) {
+// 		return next(new Error('Authentication failed: Invalid token'))
+// 	}
+// })
+
 io.on('connection', socket => {
 	console.log('WebSocket connected: ', socket.id)
+
 	socket.on('chatMessage', msg => {
-		io.emit('chatMessage', msg)
+		const user = socket.user?.username || 'Anonymous'
+		console.log('Message received: ', msg)
+		io.emit('chatMessage', { user, message: msg })
+	})
+
+	socket.on('sendNotification', msg => {
+		io.emit('notification', msg)
 	})
 
 	socket.on('disconnect', () => {
@@ -62,6 +87,7 @@ io.on('connection', socket => {
 	})
 })
 
+//* -------------------------------------------------------------------------- */
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 //close connection

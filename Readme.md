@@ -10,9 +10,13 @@ npm install nodemon -D
 npm install nodemone -g
 npm install cors
 npm install express socket.io
+npm install better-sqlite3
+npm install jsonwebtoken
 
-
-npm install better-sqlite3 //?
+//?
+npm install bcrypt
+npm install dotenv
+npm install cookie-parser
 ```
 
 </details>
@@ -189,6 +193,218 @@ export const chatRouter = Router()
 chatRouter.get('/', (req, res) => {
 	res.sendFile(path.join(rootDir, 'view', 'chat.html'))
 })
+```
+
+</details>
+<br />
+<br />
+
+ <details>
+	<summary><h2 style="display:inline"><strong>Part 2</strong></h2></summary>
+
+1. ### Update **server.js**:
+
+replace all berween `app.use(errorHandler)` and `server.listen(PORT, () => console.log("Server running on port ${PORT}"))` with
+
+```js
+//* -------------------------------- WebSocket ------------------------------- */
+
+// io.use((socket, next) => {
+// 	const token = socket.handshake.auth.token
+//
+// 	if (!token) {
+// 		return next(new Error('Authentication failed: No token provided'))
+// 	}
+// 	try {
+// 		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+// 		socket.user = decoded
+// 		next()
+// 	} catch (err) {
+// 		return next(new Error('Authentication failed: Invalid token'))
+// 	}
+// })
+
+io.on('connection', socket => {
+	console.log('WebSocket connected: ', socket.id)
+
+	socket.on('chatMessage', msg => {
+		const user = socket.user?.username || 'Anonymous'
+		console.log('Message received: ', msg)
+		io.emit('chatMessage', { user, message: msg })
+	})
+
+	socket.on('sendNotification', msg => {
+		io.emit('notification', msg)
+	})
+
+	socket.on('disconnect', () => {
+		console.log('WebSocket disconnected')
+	})
+})
+
+//* -------------------------------------------------------------------------- */
+```
+
+2. ### Update **chat.html**:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Live Chat</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<link rel="stylesheet" href="./css/chat.css" />
+	</head>
+	<body>
+		<h1>Live Chat</h1>
+
+		<input type="text" id="msgInput" placeholder="Write a message..." />
+		<button id="sendButton" onclick="sendMessage()">Send</button>
+		<button onclick="sendNotification()">Send Notification</button>
+
+		<ul id="messages"></ul>
+
+		<script src="./JS/chat.js"></script>
+	</body>
+</html>
+```
+
+3. ### Update **database/database.js**:
+   replace `console.log('The DB and table "employees" have been created!')` with
+
+```js
+db.prepare(
+	`CREATE TABLE IF NOT EXISTS projects
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    employee_id INTEGER NOT NULL,
+    project_name TEXT NOT NULL,
+    deadline TEXT,
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+  )`
+).run()
+
+db.prepare(
+	`CREATE TABLE IF NOT EXISTS skills
+    (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL UNIQUE
+    )`
+).run()
+
+db.prepare(
+	`CREATE TABLE IF NOT EXISTS employee_skills 
+    (
+      employee_id INTEGER NOT NULL,
+      skill_id INTEGER NOT NULL,
+      PRIMARY KEY (employee_id, skill_id),
+      FOREIGN KEY (employee_id) REFERENCES employees(id),
+      FOREIGN KEY (skill_id) REFERENCES skills(id)
+    )`
+).run()
+
+console.log('The DB and tables have been created!')
+```
+
+4. ### Start the server
+
+5. ### Open the program **DB Browser for SQLite**:
+
+- check if new tables `projects`, `skills` and `employee_skills` have been created
+- tab **Execute SQL** --> execute:
+
+```sql
+INSERT INTO projects (employee_id, project_name, deadline)
+VALUES (40, "Project Blue Book", "2025-09-01");
+```
+
+```sql
+INSERT INTO projects (employee_id, project_name, deadline)
+VALUES (40, "Project Bluebeam", "2025-09-01")
+```
+
+```sql
+INSERT INTO skills (name) VALUES("Digging");
+INSERT INTO skills (name) VALUES("Driving");
+INSERT INTO skills (name) VALUES("Hairstyling");
+INSERT INTO skills (name) VALUES("Receptionist");
+INSERT INTO skills (name) VALUES("Fullstack developer");
+INSERT INTO skills (name) VALUES("Customer support");
+```
+
+```sql
+INSERT INTO employee_skills (employee_id, skill_id) VALUES (35, 5);
+INSERT INTO employee_skills (employee_id, skill_id) VALUES (42, 6);
+INSERT INTO employee_skills (employee_id, skill_id) VALUES (12, 3);
+INSERT INTO employee_skills (employee_id, skill_id) VALUES (15, 1);
+INSERT INTO employee_skills (employee_id, skill_id) VALUES (50, 4);
+INSERT INTO employee_skills (employee_id, skill_id) VALUES (26, 2);
+```
+
+- tab **Brawse Data** -> choose Table:
+
+  - "projects" -> see records
+  - "skills" -> see records
+  - "employee_skills" -> see records
+
+- save Project
+
+6. ### Create **queries\projectsWithEmployee.js**:
+
+```js
+import { db } from '../database/database.js'
+
+export function getProjectsWithEmployee() {
+	return db
+		.prepare(
+			`
+      SELECT projects.project_name, projects.deadline, employees.first_name, employees.last_name FROM projects INNER JOIN employees ON projects.employee_id = employees.id
+      `
+		)
+		.all()
+}
+```
+
+7. ### Create **routes/projects.js**
+
+```js
+import { Router } from 'express'
+import { getProjectsWithEmployee } from '../queries/projectsWithEmployee.js'
+
+export const projectsRouter = new Router()
+
+projectsRouter.get('/active-projects', (req, res) => {
+	const data = getProjectsWithEmployee()
+	res.json(data)
+})
+```
+
+8. ### Update **server.js**:
+
+   after `app.use('/chat', chatRouter)` add `app.use("/projects", projectsRouter)` + import router
+
+9. ### Open browser:
+   `http://localhost:3500/projects/active-projects`
+
+Result should be:
+
+```
+[
+  {
+    "project_name": "Project Blue Book",
+    "deadline": "2025-09-01",
+    "first_name": "Joshua",
+    "last_name": "Walker"
+  },
+  {
+    "project_name": "Project Bluebeam",
+    "deadline": "2025-09-01",
+    "first_name": "Joshua",
+    "last_name": "Walker"
+  }
+]
 ```
 
 </details>
