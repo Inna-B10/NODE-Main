@@ -2,6 +2,7 @@ import { corsOptions } from '#config/corsOptions.js'
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
 import { employeesRouter } from '#routes/api/employees.js'
+import { projectsRouter } from '#routes/projects.js'
 import { rootRouter } from '#routes/root.js'
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
@@ -24,6 +25,7 @@ app.use(express.static(path.join(rootDir, '/public')))
 
 //* ----------------------------- Attach Routers ----------------------------- */
 app.use('/', rootRouter)
+app.use('/projects', projectsRouter)
 
 // API router
 app.use('/api/employees', employeesRouter)

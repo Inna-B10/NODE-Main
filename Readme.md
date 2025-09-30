@@ -131,7 +131,7 @@ projectsRouter.get('/active-projects', (req, res) => {
 
 6. ### Update **server.js**:
 
-   after `app.use('/chat', chatRouter)` add `app.use("/projects", projectsRouter)` + import router
+   after `app.use('/', rootRouter)` add `app.use("/projects", projectsRouter)` + import router
 
 7. ### Open browser:
    `http://localhost:3500/projects/active-projects`
