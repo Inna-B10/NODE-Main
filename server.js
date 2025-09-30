@@ -50,11 +50,34 @@ app.use('/api', (req, res) => {
 // error handler
 app.use(errorHandler)
 
-//webSocket
+//* -------------------------------- WebSocket ------------------------------- */
+
+// io.use((socket, next) => {
+// 	const token = socket.handshake.auth.token
+//
+// 	if (!token) {
+// 		return next(new Error('Authentication failed: No token provided'))
+// 	}
+// 	try {
+// 		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+// 		socket.user = decoded
+// 		next()
+// 	} catch (err) {
+// 		return next(new Error('Authentication failed: Invalid token'))
+// 	}
+// })
+
 io.on('connection', socket => {
-	console.log('WebSocket connected: ', socket.id)
+	console.log('WebSocket connected: ', socket.id) //server console
+
 	socket.on('chatMessage', msg => {
-		io.emit('chatMessage', msg)
+		const user = socket.user?.username || 'Anonymous'
+		console.log('Message received: ', msg)
+		io.emit('chatMessage', { user, message: msg })
+	})
+
+	socket.on('sendNotification', msg => {
+		io.emit('notification', msg)
 	})
 
 	socket.on('disconnect', () => {
@@ -62,6 +85,7 @@ io.on('connection', socket => {
 	})
 })
 
+//* -------------------------------------------------------------------------- */
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 //close connection

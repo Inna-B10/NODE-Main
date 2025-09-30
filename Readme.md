@@ -10,9 +10,7 @@ npm install nodemon -D
 npm install nodemone -g
 npm install cors
 npm install express socket.io
-
-
-npm install better-sqlite3 //?
+npm install better-sqlite3
 ```
 
 </details>
@@ -25,8 +23,9 @@ npm install better-sqlite3 //?
 
 ### **👉 [minimal primitive chat example (GPT-chat)](minimal_primitive_chat.md)**
 
-<details>
-<summary><h2 style="display:inline"><strong>Part 1</strong></h2></summary>
+### **👉 [WebSocket-model Socket.IO](WebSocket-model_Socket_IO.md)**
+
+<br />
 
 ### 1. Update **server.js**
 
@@ -191,4 +190,71 @@ chatRouter.get('/', (req, res) => {
 })
 ```
 
-</details>
+### 6. Update **server.js**:
+
+replace all between `app.use(errorHandler)` and `server.listen(PORT, () => console.log("Server running on port ${PORT}"))` with
+
+```js
+//* -------------------------------- WebSocket ------------------------------- */
+
+// io.use((socket, next) => {
+// 	const token = socket.handshake.auth.token
+//
+// 	if (!token) {
+// 		return next(new Error('Authentication failed: No token provided'))
+// 	}
+// 	try {
+// 		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+// 		socket.user = decoded
+// 		next()
+// 	} catch (err) {
+// 		return next(new Error('Authentication failed: Invalid token'))
+// 	}
+// })
+
+io.on('connection', socket => {
+	console.log('WebSocket connected: ', socket.id)
+
+	socket.on('chatMessage', msg => {
+		const user = socket.user?.username || 'Anonymous'
+		console.log('Message received: ', msg)
+		io.emit('chatMessage', { user, message: msg })
+	})
+
+	socket.on('sendNotification', msg => {
+		io.emit('notification', msg)
+	})
+
+	socket.on('disconnect', () => {
+		console.log('WebSocket disconnected')
+	})
+})
+
+//* -------------------------------------------------------------------------- */
+```
+
+### 7. Update **chat.html**:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Live Chat</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<link rel="stylesheet" href="./css/chat.css" />
+	</head>
+	<body>
+		<h1>Live Chat</h1>
+
+		<input type="text" id="msgInput" placeholder="Write a message..." />
+		<button id="sendButton" onclick="sendMessage()">Send</button>
+		<button onclick="sendNotification()">Send Notification</button>
+
+		<ul id="messages"></ul>
+
+		<script src="./JS/chat.js"></script>
+	</body>
+</html>
+```
