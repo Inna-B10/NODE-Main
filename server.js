@@ -4,6 +4,7 @@ import { logger } from '#middleware/logEvents.js'
 import { employeesRouter } from '#routes/api/employees.js'
 import { projectsRouter } from '#routes/projects.js'
 import { rootRouter } from '#routes/root.js'
+import { skillsRouter } from '#routes/skills.js'
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
@@ -26,6 +27,7 @@ app.use(express.static(path.join(rootDir, '/public')))
 //* ----------------------------- Attach Routers ----------------------------- */
 app.use('/', rootRouter)
 app.use('/projects', projectsRouter)
+app.use('/skills', skillsRouter)
 
 // API router
 app.use('/api/employees', employeesRouter)
