@@ -17,7 +17,7 @@ npm install better-sqlite3
 <br />
 
 <details>
-<summary><h2 style="display:inline"><strong>Part 1</strong></h2></summary>
+<summary><h2 style="display:inline"><strong>Part 1 - Relationships between tables</strong></h2></summary>
 
 1. ### Update **database/database.js**:
    replace `console.log('The DB and table "employees" have been created!')` with
@@ -162,7 +162,7 @@ Result should be:
 <br />
 
 <details>
-<summary><h2 style="display:inline"><strong>Part 2</strong></h2></summary>
+<summary><h2 style="display:inline"><strong>Part 2 - Building relational API routes</strong></h2></summary>
 
 <br />
 
@@ -286,5 +286,86 @@ projectsRouter.get('/latest', (req, res) => {
    - `http://localhost:3500/skills/employee/35`
    - `http://localhost:3500/projects/by-employee/40`
    - `http://localhost:3500/projects/latest`
+
+</details>
+
+<br />
+
+<details>
+<summary><h2 style="display:inline"><strong>Part 3 - Optimization, performance, indexes</strong></h2></summary>
+
+<br />
+
+### **🔷 Indexes:**
+
+1. ### Update **database\database.js**:
+   before `console.log` add
+
+```js
+//* --------------------------------- Indexes -------------------------------- */
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_projects_employee_id
+ON projects (employee_id)
+`
+).run()
+
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_employee_skills_employee_id
+ON employee_skills (employee_id)
+`
+).run()
+
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_projects_project_name
+ON projects (project_name)
+`
+).run()
+
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_skills_name
+ON skills (name)
+`
+).run()
+```
+
+2. ### Run the server
+3. ### Open program **DB Browser for SQLite**:
+
+- tab **Database Structure** --> **Indices**: 4 indexes should be created
+
+4. ### Save the project
+
+### **🔷 Filtering with `WHERE`:**
+
+Using `WHERE` clauses reduces the amount of data processed by limiting rows at the earliest stage of query execution. Efficient filters can significantly improve performance, especially when combined with proper indexes. Poorly selective or non-indexed filters, however, can still cause full table scans.
+
+- Purpose: Reduce the dataset early in query execution.
+- Performance: Works best when the filter columns are indexed.
+
+```sql
+-- Fast if 'age' is indexed
+SELECT *
+FROM users
+WHERE age > 30;
+```
+
+### **🔷 Limitation with `LIMIT`:**
+
+The `LIMIT` clause restricts the number of rows returned, which reduces memory usage and network transfer. While it speeds up result delivery to the client, it does not optimize the underlying scan or filtering itself. To achieve the best performance, `LIMIT` is often used together with indexed filtering or sorting.
+
+- Purpose: Restrict the number of rows returned to the client.
+- Performance: Reduces transfer/memory, but doesn’t optimize the scan itself.
+
+```sql
+-- Returns only the first 10 rows
+SELECT *
+FROM products
+ORDER BY created_at DESC
+LIMIT 10;
+```
 
 </details>

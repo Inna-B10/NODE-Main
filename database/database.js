@@ -7,7 +7,7 @@ const dbPath = path.join(rootDir, 'database', 'companyEmployees.sqlite')
 // Connect to the database (will create the companyEmployees.sqlite file if it doesn't exist)
 export const db = new Database(dbPath, { verbose: console.log })
 
-// Create a table if there isn't one
+//* --------------------------------- Tables --------------------------------- */
 db.prepare(
 	`CREATE TABLE IF NOT EXISTS employees
   (
@@ -46,6 +46,35 @@ db.prepare(
       FOREIGN KEY (employee_id) REFERENCES employees(id),
       FOREIGN KEY (skill_id) REFERENCES skills(id)
     )`
+).run()
+
+//* --------------------------------- Indexes -------------------------------- */
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_projects_employee_id
+ON projects (employee_id)
+`
+).run()
+
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_employee_skills_employee_id
+ON employee_skills (employee_id)
+`
+).run()
+
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_projects_project_name
+ON projects (project_name)
+`
+).run()
+
+db.prepare(
+	`
+CREATE INDEX IF NOT EXISTS idx_skills_name
+ON skills (name)
+`
 ).run()
 
 console.log('The DB and tables have been created!')
