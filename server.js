@@ -1,6 +1,7 @@
 import { corsOptions } from '#config/corsOptions.js'
 import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
+import { apiLimiter } from '#middleware/rateLimiter.js'
 import { employeesRouter } from '#routes/api/employees.js'
 import { projectsRouter } from '#routes/projects.js'
 import { rootRouter } from '#routes/root.js'
@@ -8,6 +9,7 @@ import { skillsRouter } from '#routes/skills.js'
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
 import express from 'express'
+import helmet from 'helmet'
 import path from 'path'
 import { db } from './database/database.js'
 
@@ -16,6 +18,12 @@ const app = express()
 
 //* ------------------------------- Middleware ------------------------------- */
 app.use(logger)
+
+//rate limiting
+app.use('api/', apiLimiter)
+
+//helmet
+app.use(helmet())
 
 //cors
 app.use(cors(corsOptions))
