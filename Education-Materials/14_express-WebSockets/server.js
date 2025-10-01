@@ -70,7 +70,7 @@ app.use(errorHandler)
 // })
 
 io.on('connection', socket => {
-	console.log('WebSocket connected: ', socket.id)
+	console.log('WebSocket connected: ', socket.id) //server console
 
 	socket.on('chatMessage', msg => {
 		const user = socket.user?.username || 'Anonymous'
