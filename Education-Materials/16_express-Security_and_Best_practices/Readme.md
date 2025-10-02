@@ -12,6 +12,7 @@ npm install cors
 npm install better-sqlite3
 npm install express-rate-limit
 npm install helmet
+npm install dotenv
 ```
 
 </details>
@@ -78,3 +79,85 @@ export const apiLimiter = rateLimit({
 </details>
 
 <br />
+
+<details>
+<summary><h2 style="display:inline"><strong>Event logging</strong></h2></summary>
+
+<br />
+
+1.  ### Install dotenv in case you don't have it already
+2.  ### Update **middleware/logEvents.js**: add at the end
+
+```js
+if (progress.env.NODE_ENV === 'development') {
+	console.log(`${req.method} ${req.path}`)
+}
+next()
+```
+
+3. ### Update/Create **.env**: add
+
+```js
+NODE_ENV = development
+OPENAI_API_KEY = myKey-123abc456def
+```
+
+4. ### Create **controllers\apiController.js**
+
+```js
+const apiKey = process.env.OPENAI_API_KEY
+```
+
+<br />
+
+- Be sure you import variables from **.env** file at app start.
+  In **server.js** you need
+
+```js
+import dotenv from 'dotenv'
+dotenv.config()
+```
+
+5. ### Update **middleware/errorHandler.js**
+   replace
+
+```js
+console.error(err.stack)
+res.status(500).send(err.message)
+```
+
+with
+
+```js
+if (process.env.NODE_ENV === 'development') {
+	console.error(err.stack)
+	res.status(500).send(err.message)
+} else {
+	res.status(500).send('Internal Server Error')
+}
+```
+
+6. ### Update **server.js**:
+   replace
+
+```js
+//rate limiting
+app.use('api/', apiLimiter)
+
+//helmet
+app.use(helmet())
+```
+
+with
+
+```js
+if (process.env.NODE_ENV === 'development') {
+	//rate limiting
+	app.use('api/', apiLimiter)
+
+	//helmet
+	app.use(helmet())
+}
+```
+
+</details>
