@@ -8,10 +8,14 @@ import { rootRouter } from '#routes/root.js'
 import { skillsRouter } from '#routes/skills.js'
 import { rootDir } from '#utils/path.js'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
 import path from 'path'
 import { db } from './database/database.js'
+
+// Load env only once at app start
+dotenv.config()
 
 const PORT = process.env.PORT || 3500
 const app = express()
@@ -19,12 +23,13 @@ const app = express()
 //* ------------------------------- Middleware ------------------------------- */
 app.use(logger)
 
-//rate limiting
-app.use('api/', apiLimiter)
+if (process.env.NODE_ENV === 'production') {
+	//rate limiting
+	app.use('api/', apiLimiter)
 
-//helmet
-app.use(helmet())
-
+	//helmet
+	app.use(helmet())
+}
 //cors
 app.use(cors(corsOptions))
 
@@ -42,14 +47,14 @@ app.use('/api/employees', employeesRouter)
 
 //* ------------------------ 404 And ErrorHandler Middlewares ----------------------- */
 
-// 404 HTML
-app.use((req, res) => {
-	res.status(404).sendFile(path.join(rootDir, 'view', '404.html'))
-})
-
 // 404 API
 app.use('/api', (req, res) => {
 	res.status(404).json({ error: 'API endpoint not found', path: req.params.path })
+})
+
+// 404 HTML
+app.use((req, res) => {
+	res.status(404).sendFile(path.join(rootDir, 'view', '404.html'))
 })
 
 // error handler

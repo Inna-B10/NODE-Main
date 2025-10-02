@@ -24,3 +24,8 @@ export function logger(req, res, next) {
 	console.log(req.method, req.path)
 	next()
 }
+
+if (progress.env.NODE_ENV === 'development') {
+	console.log(`${req.method} ${req.path}`)
+}
+next()
