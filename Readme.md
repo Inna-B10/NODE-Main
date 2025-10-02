@@ -7,8 +7,9 @@
 npm init -y
 npm install date-fns, express, uuid
 npm install nodemon -D
-npm install nodemone -g
+npm install nodemon -g
 npm install cors
+npm install dotenv
 npm install better-sqlite3
 ```
 
@@ -368,4 +369,56 @@ ORDER BY created_at DESC
 LIMIT 10;
 ```
 
+## IMPORTANT UPDATE:
+
+### **🧐 What could be improved:**
+
+1. The index on `skills.name` is not needed because the field is `UNIQUE`, SQLite automatically creates an index for unique fields. This index duplicates the work.
+
+2. There's no index on `employee_skills.skill_id` — only on **employee_id**.  
+   👉 If we frequently search for "all employees with a given skill," we need an index on skill_id as well.
+3. `verbose: console.log` is enabled—this is useful for learning, but will be spam in production. It's best to leave it as a setting in `.env`.
+4. **FOREIGN KEY** in SQLite: They are **not enabled by default**.
+   Add this:
+
+```js
+db.pragma('foreign_keys = ON')
+```
+
+otherwise the connections are "for beauty" and not for control.
+
+---
+
+<br />
+
+### **🧩 Let’s break the code down step by step:**
+
+1. `skills.name UNIQUE`
+
+   - In SQLite, **every UNIQUE constraint automatically creates a hidden index**.
+   - So **idx_skills_name** is indeed **redundant**.
+
+2. `employee_skills (employee_id, skill_id) PRIMARY KEY`
+
+   - A **PRIMARY KEY** in SQLite → is a **composite unique index on (employee_id, skill_id)**.
+   - This index works perfectly for queries that filter by **both keys together** or for enforcing uniqueness of the pair.
+
+   But:
+
+   - If you often query only by `employee_id`, SQLite **can still use the composite index** (because it’s prefix-based: the first column is indexed).
+   - However, for queries like "**find all employees who have skill_id = X**", the composite index **won’t** help, because `skill_id` is the second column.
+     - In that case, a separate index on `skill_id` can really speed things up.
+
+### 👉 Conclusion:
+
+`idx_skills_name` → redundant, remove it.
+
+`idx_employee_skills_employee_id` → not really needed, since (`employee_id`, `skill_id`) already covers `employee_id`.
+
+`idx_employee_skills_skill_id` → can be useful if you frequently search employees by skill (**WHERE skill_id = ?**).
+
+🔧 So it all depends on query patterns:
+
+- **Looking up skills of a given employee** → composite PK is enough.
+- **Looking up employees with a given skill** → you’ll want an extra index on `skill_id`.
 </details>
