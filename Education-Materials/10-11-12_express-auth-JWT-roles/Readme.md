@@ -7,7 +7,7 @@
 npm init -y
 npm install date-fns, express, uuid
 npm install nodemon -D
-npm install nodemone -g
+npm install nodemon -g
 npm install cors
 npm install bcrypt
 npm install dotenv
