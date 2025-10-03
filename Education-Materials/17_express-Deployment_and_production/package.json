@@ -1,0 +1,42 @@
+{
+	"name": "17_express-deployment_and_production",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"sideEffects": false,
+	"imports": {
+		"#utils/*": "./utils/*",
+		"#routes/*": "./routes/*",
+		"#view/*": "./view/*",
+		"#logs/*": "./logs/*",
+		"#middleware/*": "./middleware/*",
+		"#controllers/*": "./controllers/*",
+		"#constants/*": "./constants/*",
+		"#config/*": "./config/*"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server",
+		"dev": "nodemon server",
+		"test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+	},
+	"dependencies": {
+		"bcrypt": "^6.0.0",
+		"better-sqlite3": "^12.4.1",
+		"cors": "^2.8.5",
+		"date-fns": "^4.1.0",
+		"dotenv": "^17.2.3",
+		"express": "^5.1.0",
+		"express-rate-limit": "^8.1.0",
+		"helmet": "^8.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"uuid": "^13.0.0"
+	},
+	"devDependencies": {
+		"jest": "^30.2.0",
+		"nodemon": "^3.1.10",
+		"supertest": "^7.1.4"
+	}
+}
