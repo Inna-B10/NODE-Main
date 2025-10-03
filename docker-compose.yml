@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  server:
+    build: .
+    ports:
+      - '3500:3500'
+    environment:
+      - NODE_ENV = production
+      - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+      - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
