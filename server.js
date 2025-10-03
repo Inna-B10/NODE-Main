@@ -3,6 +3,7 @@ import { errorHandler } from '#middleware/errorHandler.js'
 import { logger } from '#middleware/logEvents.js'
 import { apiLimiter } from '#middleware/rateLimiter.js'
 import { employeesRouter } from '#routes/api/employees.js'
+import { authRouter } from '#routes/auth.js'
 import { projectsRouter } from '#routes/projects.js'
 import { rootRouter } from '#routes/root.js'
 import { skillsRouter } from '#routes/skills.js'
@@ -18,7 +19,7 @@ import { db } from './database/database.js'
 dotenv.config()
 
 const PORT = process.env.PORT || 3500
-const app = express()
+export const app = express()
 
 //* ------------------------------- Middleware ------------------------------- */
 app.use(logger)
@@ -41,6 +42,7 @@ app.use(express.static(path.join(rootDir, '/public')))
 app.use('/', rootRouter)
 app.use('/projects', projectsRouter)
 app.use('/skills', skillsRouter)
+app.use('/auth{/}', authRouter)
 
 // API router
 app.use('/api/employees', employeesRouter)
